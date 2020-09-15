@@ -25,6 +25,6 @@ export class Assinatura {
     dataDesassinatura:string;
 
     @Column()
-    isAtivo: boolean;
+    isAtiva: boolean;
 
 }

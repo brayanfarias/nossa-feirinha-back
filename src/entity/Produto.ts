@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Gondola } from "./Gondola";
 
 @Entity()
 export class Produto {
