@@ -1,56 +1,17 @@
 import "reflect-metadata";
-import { Produtor } from "./entity/Produtor";
+import express = require('express');
+import bodyParser = require('body-parser')
+import routes from './routes'
 import { createConnection } from "typeorm";
-import { Assinatura } from "./entity/Assinatura";
-import { Evento } from "./entity/Evento";
 
-createConnection().then(async connection => {
-const assinatura = new Assinatura();
-const produtor = new Produtor();
-const evento = new Evento();
+const app = express();
 
-produtor.nome="teste"
-produtor.telefone="teste"
-produtor.email="teste"
-produtor.cnpj="teste"
-produtor.senha="teste"
+createConnection()
 
-await connection.manager.save(Produtor,produtor)
+app.use(bodyParser.json())
 
-evento.nome="teste";
-evento.dataEvento="teste";
-evento.latitude="teste";
-evento.longitude="teste";
-evento.criador=produtor;
+app.use(express.json());
 
-await connection.manager.save(Evento,evento)
+app.use(routes);
 
-assinatura.dataAssinatura="teste";
-assinatura.dataDesassinatura="teste";
-assinatura.isAtivo=false;
-assinatura.evento=evento;
-assinatura.usuario = produtor;
-
-await connection.manager.save(Assinatura,assinatura)
-
-
-}).catch(error => console.log(error));
-
-// const app = express();
-
-// app.use(express.json())
-
-// app.post('/', function (request, response) {
-//     const produtor: Produtor = request.body as Produtor;
-
-//     createConnection().then(async connection => {
-
-//         const result = await connection.manager.save((Produtor), produtor);
-//         console.log(result)
-
-//     })
-    
-
-// });
-
-// app.listen(3000);
+app.listen(3000);
