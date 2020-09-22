@@ -2,8 +2,6 @@
 import { Consumidor } from "../entity/Consumidor";
 import { getConnection } from "typeorm";
 import { Request, Response } from "express";
-//testing
-
 
 class consumidorController {
 
