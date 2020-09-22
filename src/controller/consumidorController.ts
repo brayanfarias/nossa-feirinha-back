@@ -21,8 +21,6 @@ class consumidorController {
         throw new Error('Method not implemented.');
     }
 
-
-
     async create(request: Request, response: Response) {
 
         const consumidor: Consumidor = request.body as Consumidor;
