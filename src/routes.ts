@@ -21,5 +21,7 @@ routes.patch('/produtor', produtorController.update)
 routes.delete('/produtor/:idUsuario', produtorController.delete)
 
 routes.post('/evento', eventoController.create);
+routes.get('/evento/:idEvento', eventoController.get)
+routes.delete('/evento/:idEvento', eventoController.delete)
 
 export default routes;

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToOne, ViewColumn, JoinTable } from "typeorm";
 import { Consumidor } from "./Consumidor";
 import { Produtor } from "./Produtor";
 
@@ -20,11 +20,9 @@ export class Evento {
     @Column()
     longitude: string
     
-    @ManyToOne(type => Consumidor)
-    @JoinColumn()
+    @ManyToOne(type => Consumidor, consumidor => consumidor.eventos)  
     criadorConsumidor: Consumidor;
 
-    @ManyToOne(type => Produtor)
-    @JoinColumn()
+    @ManyToOne(type => Produtor, produtor => produtor.eventos)
     criadorProdutor: Produtor;
 }
