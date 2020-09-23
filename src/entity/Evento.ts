@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { Consumidor } from "./Consumidor";
 import { Produtor } from "./Produtor";
 
@@ -6,21 +6,25 @@ import { Produtor } from "./Produtor";
 export class Evento {
 
     @PrimaryGeneratedColumn("uuid")
-    idEvento:string;
+    idEvento: string;
 
     @Column()
-    nome:string;
+    nome: string;
 
     @Column()
     dataEvento: string;
 
     @Column()
-    latitude:string;
+    latitude: string;
 
     @Column()
-    longitude:string
-
-    @ManyToOne(type => Produtor || Consumidor)
+    longitude: string
+    
+    @ManyToOne(type => Consumidor)
     @JoinColumn()
-    criador:  Consumidor | Produtor;
+    criadorConsumidor: Consumidor;
+
+    @ManyToOne(type => Produtor)
+    @JoinColumn()
+    criadorProdutor: Produtor;
 }

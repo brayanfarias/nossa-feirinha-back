@@ -16,28 +16,34 @@ class EventoController {
 
         const idUsuario: string = request.body.Criador.idUsuario;
 
-        let criador: Consumidor | Produtor;
+        let criadorConsumidor: Consumidor;
+        let criadorProdutor: Produtor;
+
+        const evento: Evento = request.body as Evento;
 
         try {
-            console.info("Procurando pelo consumidor...");
-            criador = await consumidorController.getById(idUsuario);
+            console.info("[INFO] Procurando pelo criador na tabela consumidor...");
+            criadorConsumidor = await consumidorController.getById(idUsuario);
 
-            if (!criador) {
-                console.info("Consumidor não encontrado! Procurando por produtor...");
-                criador = await produtorController.getById(idUsuario);
+            if (criadorConsumidor) {
+                console.info("[INFO] Criador encontrado na tabela consumidor...");
+                evento.criadorConsumidor = criadorConsumidor;
+                evento.criadorProdutor = null;
+            } else {
+                console.info("[INFO] Consumidor não encontrado! Procurando pelo criador na tabela produtor...");
+                criadorProdutor = await produtorController.getById(idUsuario);
+                evento.criadorProdutor = criadorProdutor;
+                evento.criadorConsumidor = null;
             }
 
-            if (!criador) {
+            if (!criadorConsumidor && !criadorProdutor) {
+                console.info("[INFO] Criador não encontrado nem na tabela Produtor nem na tabela Consumidor.");
                 return response.status(404).send("Não localizei o criador nem como Consumidor nem como Produtor.");
             }
 
         } catch (error) {
             return response.status(500).send("Problemas para procurar o criador no banco de dados");
         }
-
-        const evento: Evento = request.body as Evento;
-
-        evento.criador = criador;
 
         const result = await getConnection().manager.save(Evento, evento);
 
