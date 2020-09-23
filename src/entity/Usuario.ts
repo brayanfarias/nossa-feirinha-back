@@ -1,20 +1,20 @@
-import { PrimaryGeneratedColumn, Column} from 'typeorm'
+import { PrimaryGeneratedColumn, Column } from 'typeorm'
 
 export class Usuario {
 
     @PrimaryGeneratedColumn("uuid")
-     idUsuario: string;
+    idUsuario: string;
 
     @Column()
-    nome:string;
+    nome: string;
 
     @Column()
-    telefone:string;
+    telefone: string;
 
     @Column()
-    email:string;
+    email: string;
 
     @Column()
-    senha:string;
+    senha: string;
 
 }
