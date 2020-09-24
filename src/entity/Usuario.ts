@@ -1,4 +1,5 @@
-import { PrimaryGeneratedColumn, Column } from 'typeorm'
+import { PrimaryGeneratedColumn, Column, OneToOne, JoinTable } from 'typeorm'
+import { Endereco } from './Endereco';
 
 export class Usuario {
 
@@ -16,5 +17,9 @@ export class Usuario {
 
     @Column()
     senha: string;
+
+    @OneToOne(type => Endereco)
+    @JoinTable()
+    endereco:Endereco
 
 }
