@@ -3,7 +3,7 @@ import { Produtor } from "../entity/Produtor";
 import { getConnection } from "typeorm";
 import { Request, Response } from "express";
 
-class produtorController {
+class ProdutorController {
 
     async delete(request: Request, response: Response) {
 
@@ -39,6 +39,20 @@ class produtorController {
         return response.send(result).status(200)
 
     }
+
+    async getByCpf(cpf) {
+
+        const result = await getConnection().getRepository(Produtor).find(cpf)
+
+        return result;
+    }
+
+    async getById(idUsuario) {
+
+        const produtor = await getConnection().getRepository(Produtor).findOne(idUsuario)
+        
+        return produtor;
+    }
 }
 
-export default produtorController;
+export default ProdutorController;

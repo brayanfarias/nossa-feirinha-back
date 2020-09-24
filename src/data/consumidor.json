@@ -1,7 +1,7 @@
 {
-	"nome": "{nome_consumidor}",
-	"telefone": "{telefone_consumidor}",
-	"email": "{email@teste.com.br}",
-	"senha": "{senha}",
-	"cpf": "{CPF}" 
+	"nome": "Nome_consumidor",
+	"telefone": "Telefone_consumidor",
+	"email": "email@consumidor",
+	"senha": "senha",
+	"cpf": "cpf" 
 }

@@ -1,7 +1,7 @@
 {
-	"nome": "{nome_produtor}",
-	"telefone": "{telefone_produtor}",
-	"email": "{email@teste.com.br}",
-	"senha": "{senha}",
-	"cpf": "{CPF}" 
+	"nome": "Nome_produtor",
+	"telefone": "Telefone_produtor",
+	"email": "email@produtor.com.br",
+	"senha": "senha",
+	"cnpj": "cnpj" 
 }

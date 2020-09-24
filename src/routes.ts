@@ -1,18 +1,27 @@
 
 import express = require('express');
-import consumidorController from "./controller/consumidorController";
-import produtorController from "./controller/produtorController";
+import EventoController from "./controller/EventoController";
+import ConsumidorController from "./controller/ConsumidorController";
+import ProdutorController from "./controller/ProdutorController";
 
 const routes = express.Router();
 
-routes.post('/consumidor', new consumidorController().create);
-routes.get('/consumidor/:email', new consumidorController().getByEmail);
-routes.patch('/consumidor', new consumidorController().update)
-routes.delete('/consumidor/:idUsuario', new consumidorController().delete)
+const consumidorController = new ConsumidorController()
+const produtorController = new ProdutorController()
+const eventoController =  new EventoController();
 
-routes.post('/produtor', new produtorController().create);
-routes.get('/produtor/:email', new produtorController().getByEmail);
-routes.patch('/produtor', new produtorController().update)
-routes.delete('/produtor/:idUsuario', new produtorController().delete)
+routes.post('/consumidor', consumidorController.create);
+routes.get('/consumidor/:email', consumidorController.getByEmail);
+routes.patch('/consumidor', consumidorController.update)
+routes.delete('/consumidor/:idUsuario', consumidorController.delete)
+
+routes.post('/produtor', produtorController.create);
+routes.get('/produtor/:email', produtorController.getByEmail);
+routes.patch('/produtor', produtorController.update)
+routes.delete('/produtor/:idUsuario', produtorController.delete)
+
+routes.post('/evento', eventoController.create);
+routes.get('/evento/:idEvento', eventoController.get)
+routes.delete('/evento/:idEvento', eventoController.delete)
 
 export default routes;

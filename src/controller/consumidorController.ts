@@ -3,7 +3,7 @@ import { Consumidor } from "../entity/Consumidor";
 import { getConnection } from "typeorm";
 import { Request, Response } from "express";
 
-class consumidorController {
+class ConsumidorController {
 
     async delete(request: Request, response: Response) {
 
@@ -20,8 +20,6 @@ class consumidorController {
     update(arg0: string, update: any) {
         throw new Error('Method not implemented.');
     }
-
-
 
     async create(request: Request, response: Response) {
 
@@ -41,6 +39,20 @@ class consumidorController {
         return response.send(result).status(200)
 
     }
+
+    async getByCpf(cpf) {
+
+        const result = await getConnection().getRepository(Consumidor).find(cpf)
+
+        return result;
+    }
+
+    async getById(idUsuario) {
+
+        const consumidor = await getConnection().getRepository(Consumidor).findOne(idUsuario)
+
+        return consumidor;
+    }
 }
 
-export default consumidorController;
+export default ConsumidorController;

@@ -1,0 +1,9 @@
+{
+	"nome": "Nome_Evento",
+	"dataEvento": "Data_Evento",
+	"latitude": "Latitude_Evento",
+	"longitude": "Longitude_Evento",
+	"Criador": {		
+		"idUsuario": "0ce98eb3-a49c-4378-95ee-f065ae0ab033"
+	}
+}
