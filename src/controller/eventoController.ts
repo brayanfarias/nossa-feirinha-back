@@ -28,7 +28,7 @@ class EventoController {
 
         const idEvento = request.params.idEvento;
 
-        const result = await getConnection().getRepository(Evento).findOne(idEvento, { relations: ["criadorConsumidor", "criadorProdutor"] })
+        const result = await getConnection().getRepository(Evento).findOne(idEvento)
 
         return response.status(200).send(result);
     }

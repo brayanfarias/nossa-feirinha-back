@@ -1,7 +1,17 @@
 {
-	"nome": "Nome_consumidor",
-	"telefone": "Telefone_consumidor",
-	"email": "email@consumidor",
-	"senha": "senha",
-	"cpf": "cpf" 
+	"nome": "Brayan Farias",
+	"telefone": "41988924363",
+	"email": "bpjfarias@gmail.com",
+	"senha": "qwe123",
+	"cpf": "08772990996",
+    "endereco": {
+            "rua": "Sebastiao Marcos Luiz",
+            "numero": "1122",
+            "complemento": "",
+            "bairro":"Cajuru",
+            "cidade":"Curitiba",
+            "uf":"pr",
+            "cep": 82940250
+    }
+
 }
