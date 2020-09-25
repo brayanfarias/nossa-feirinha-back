@@ -21,3 +21,7 @@
     - As chamadas REST devem ser feitas contra localhost:3000
     - As rotas (com os paths e os verbos HTTP) estão no arquivo routes.ts
 
+# Desenho do Diagrama de Classe deste projeto
+
+https://drive.google.com/file/d/17HGDugozJD66Dhrk3bhXm4tb5wu_DW5Q/view?usp=sharing
+
