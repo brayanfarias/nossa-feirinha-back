@@ -3,7 +3,17 @@
 	"dataEvento": "Data_Evento",
 	"latitude": "Latitude_Evento",
 	"longitude": "Longitude_Evento",
+    "descricao": "Descrição do evento",
+    "endereco": {
+            "rua": "Sebastiao Marcos Luiz",
+            "numero": "1122",
+            "complemento": "",
+            "bairro":"Cajuru",
+            "cidade":"Curitiba",
+            "uf":"pr",
+            "cep":82940250
+    },
 	"Criador": {		
-		"idUsuario": "0ce98eb3-a49c-4378-95ee-f065ae0ab033"
+		"idUsuario": "3c7c9a64-0bf5-4f90-9412-514f594e0661"
 	}
 }
