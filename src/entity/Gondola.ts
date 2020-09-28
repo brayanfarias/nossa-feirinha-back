@@ -1,5 +1,5 @@
 import { Produtor } from "./Produtor";
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, ManyToOne } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, JoinColumn, OneToMany, ManyToOne } from "typeorm";
 import { ItemGondola } from "./ItemGondola";
 
 @Entity()

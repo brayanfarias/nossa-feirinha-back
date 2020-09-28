@@ -8,6 +8,10 @@ import ProdutoController from "./ProdutoController";
 import ProdutorController from "./ProdutorController";
 
 export class GondolaController {
+    
+    async getAll() {
+        throw new Error('Method not implemented.');
+    }
 
     async create(request: Request, response: Response) {
 

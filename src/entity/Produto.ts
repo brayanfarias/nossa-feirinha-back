@@ -18,5 +18,4 @@ export class Produto {
 
     @ManyToOne(type => Usuario, usuario => usuario.produtos)
     criador: Usuario;
-
 }
