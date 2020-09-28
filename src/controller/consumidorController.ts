@@ -49,7 +49,7 @@ class ConsumidorController {
         return result;
     }
 
-    async getById(idUsuario) {
+    async getById(idUsuario:string) {
 
         const consumidor = await getConnection().getRepository(Consumidor).findOne(idUsuario)
 

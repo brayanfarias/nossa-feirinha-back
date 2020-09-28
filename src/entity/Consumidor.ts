@@ -1,13 +1,10 @@
 import { Usuario } from "./Usuario";
-import { Entity, Column, OneToMany } from "typeorm";
-import { Evento } from "./Evento";
+import {  Column, ChildEntity } from "typeorm";
 
-@Entity()
+@ChildEntity()
 export class Consumidor extends Usuario{
 
         @Column()
         cpf:string;
-
-        @OneToMany(type => Evento, evento => evento.criadorConsumidor)
-        eventos: Evento[]
+       
 }

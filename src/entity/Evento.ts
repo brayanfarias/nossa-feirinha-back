@@ -1,7 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToOne, ViewColumn, JoinTable } from "typeorm";
-import { Consumidor } from "./Consumidor";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { Endereco } from "./Endereco";
-import { Produtor } from "./Produtor";
+import { Usuario } from "./Usuario";
 
 @Entity()
 export class Evento {
@@ -23,16 +22,11 @@ export class Evento {
 
     @Column()
     longitude: string;
-
-    @ManyToOne(type => Consumidor, consumidor => consumidor.eventos, {
+   
+    @ManyToOne(type => Usuario, usuario => usuario.eventos, {
         eager: true,
     })
-    criadorConsumidor: Consumidor;
-
-    @ManyToOne(type => Produtor, produtor => produtor.eventos, {
-        eager: true,
-    })
-    criadorProdutor: Produtor;
+    criador: Usuario;
 
     @OneToOne(type => Endereco, {
         cascade: true,

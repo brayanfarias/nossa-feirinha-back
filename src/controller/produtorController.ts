@@ -47,7 +47,7 @@ class ProdutorController {
         return result;
     }
 
-    async getById(idUsuario) {
+    async getById(idUsuario:string) {
 
         const produtor = await getConnection().getRepository(Produtor).findOne(idUsuario)
         
