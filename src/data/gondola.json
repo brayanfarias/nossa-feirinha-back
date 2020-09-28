@@ -7,6 +7,14 @@
     {
       "idProduto": "xxxxxxxxxxxxxx",
       "quantidade": 12
+    },
+    {
+      "idProduto": "xxxxxxxxxxxxxx",
+      "quantidade": 10
+    },
+    {
+      "idProduto": "xxxxxxxxxxxxxx",
+      "quantidade": 8
     }
   ]
 }

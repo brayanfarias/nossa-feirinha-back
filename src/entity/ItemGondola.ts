@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Gondola } from "./Gondola";
 import { Produto } from "./Produto";
 
@@ -8,7 +8,7 @@ export class ItemGondola {
     @PrimaryGeneratedColumn('uuid')
     idItemGondola: string;
 
-    @OneToOne(type => Produto, {
+    @ManyToOne(type => Produto, {
         eager: true
     })
     @JoinColumn()

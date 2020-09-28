@@ -1,5 +1,5 @@
 import { Produtor } from "./Produtor";
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany, ManyToOne } from "typeorm";
 import { ItemGondola } from "./ItemGondola";
 
 @Entity()
@@ -11,7 +11,7 @@ export class Gondola {
     @Column()
     isExpostaPerfil: boolean;
 
-    @OneToOne(type => Produtor)
+    @ManyToOne(type => Produtor)
     @JoinColumn()
     produtor: Produtor;
 

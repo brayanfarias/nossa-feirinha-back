@@ -18,27 +18,26 @@ export class GondolaController {
         const gondola = new Gondola();
         gondola.itensGondola = [];
 
-        const isExpostaPerfil = request.body.isExpostaPerfil
-        gondola.isExpostaPerfil = isExpostaPerfil
+        gondola.isExpostaPerfil = request.body.isExpostaPerfil
 
         gondola.produtor = produtor;
 
-        const idProduto = request.body.itensGondola[0].idProduto
+        const produtoController = new ProdutoController()
 
-        const produto: Produto = await new ProdutoController().getById(idProduto)
+        for (const index of request.body.itensGondola) {
+            const idProduto = index.idProduto;
+            const produto: Produto = await produtoController.getById(idProduto);
 
-        const itemGondola = new ItemGondola();
-        itemGondola.produto = produto;
-        itemGondola.quantidade = request.body.itensGondola[0].quantidade
-        gondola.itensGondola.push(itemGondola);
+            const itemGondola = new ItemGondola();
+            itemGondola.produto = produto;
+            itemGondola.quantidade = index.quantidade
+            gondola.itensGondola.push(itemGondola);
+        }
 
         const result = await getConnection().getRepository(Gondola).save(gondola)
 
         response.status(200).send(result)
     }
-
-
-
 }
 
 export default GondolaController;
