@@ -1,0 +1,12 @@
+{
+  "isExpostaPerfil": true,
+  "Produtor": {
+    "idUsuario": "xxxxxxxxxxxxxxxxxx"
+  },
+  "itensGondola": [
+    {
+      "idProduto": "xxxxxxxxxxxxxx",
+      "quantidade": 12
+    }
+  ]
+}

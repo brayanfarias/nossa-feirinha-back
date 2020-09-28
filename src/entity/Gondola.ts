@@ -1,22 +1,24 @@
-import { Produto } from "./Produto";
 import { Produtor } from "./Produtor";
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, ManyToMany, JoinTable } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import { ItemGondola } from "./ItemGondola";
 
 @Entity()
 export class Gondola {
 
     @PrimaryGeneratedColumn("uuid")
-    idGondola:string;
-
-    @ManyToMany(type => Produto)
-    @JoinTable()
-    produtos: Array<Produto>;
-
-    @OneToOne(type => Produtor)
-    @JoinColumn()
-    produtor:Produtor;
+    idGondola: string;
 
     @Column()
     isExpostaPerfil: boolean;
-    
+
+    @OneToOne(type => Produtor)
+    @JoinColumn()
+    produtor: Produtor;
+
+    @OneToMany(type => ItemGondola, itemGondola => itemGondola.gondola, {
+        cascade: true,
+        onDelete: "CASCADE",
+        eager: true
+    })
+    itensGondola: ItemGondola[] 
 }

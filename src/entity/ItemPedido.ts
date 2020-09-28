@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Produto } from "./Produto";
 
 @Entity()
@@ -8,7 +8,7 @@ export class ItemPedido {
     idItemPedido: string;
 
     @OneToOne(type => Produto)
-    @JoinTable()
+    @JoinColumn()
     produto: Produto;
 
     @Column()

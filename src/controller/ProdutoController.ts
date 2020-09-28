@@ -6,6 +6,13 @@ import UsuarioController from "./UsuarioController";
 
 export class ProdutoController {
 
+    async getById(idProduto: string) {
+        
+        const result = await getConnection().getRepository(Produto).findOne(idProduto)
+
+        return result;
+    }
+
     async delete(request: Request, response: Response) {
       
         const idProduto = request.params.idProduto
