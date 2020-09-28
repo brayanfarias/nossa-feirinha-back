@@ -1,4 +1,5 @@
-import { PrimaryGeneratedColumn, Column } from 'typeorm'
+import { PrimaryGeneratedColumn, Column, OneToOne, JoinTable, JoinColumn } from 'typeorm'
+import { Endereco } from './Endereco';
 
 export class Usuario {
 
@@ -17,4 +18,16 @@ export class Usuario {
     @Column()
     senha: string;
 
+    @OneToOne(type => Endereco,{
+        cascade: true,
+        /**
+         * @todo Implementar outra forma de deletar a linha do Endereco
+         * @see https://github.com/typeorm/typeorm/issues/3218
+         */
+        onDelete: "CASCADE",
+        eager: true        
+    })
+    @JoinColumn()
+    endereco: Endereco
+    
 }

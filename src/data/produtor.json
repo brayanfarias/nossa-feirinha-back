@@ -1,7 +1,17 @@
 {
-	"nome": "Nome_produtor",
-	"telefone": "Telefone_produtor",
-	"email": "email@produtor.com.br",
-	"senha": "senha",
-	"cnpj": "cnpj" 
+	"nome": "Brayan Farias",
+	"telefone": "41988924363",
+	"email": "bpjfarias@gmail.com",
+	"senha": "qwe123",
+	"cnpj": "08772990996",
+    "endereco": {
+            "rua": "Sebastiao Marcos Luiz",
+            "numero": "1122",
+            "complemento": "",
+            "bairro":"Cajuru",
+            "cidade":"Curitiba",
+            "uf":"pr",
+            "cep":82940250
+    }
+
 }

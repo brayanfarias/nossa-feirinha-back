@@ -3,32 +3,34 @@ import { Consumidor } from "../entity/Consumidor";
 import { getConnection } from "typeorm";
 import { Request, Response } from "express";
 
+
+
 class ConsumidorController {
+
+    async create(request: Request, response: Response) {
+
+        const consumidor: Consumidor = request.body as Consumidor;        
+
+        const consumidorResult = await getConnection().getRepository(Consumidor).save(consumidor)
+
+        return response.send(consumidorResult).status(200);
+    }
 
     async delete(request: Request, response: Response) {
 
-        const idUsuario = request.params
+        const idUsuario = request.params.idUsuario
 
-        const consumidor = await getConnection().getRepository(Consumidor).find(idUsuario)
+        const consumidor = await getConnection().getRepository(Consumidor).findOne(idUsuario)       
 
         const resultDelete = await getConnection().getRepository(Consumidor).remove(consumidor)
-
+        
         return response.send(resultDelete).status(200);
-
     }
 
     update(arg0: string, update: any) {
         throw new Error('Method not implemented.');
     }
 
-    async create(request: Request, response: Response) {
-
-        const consumidor: Consumidor = request.body as Consumidor;
-
-        await getConnection().manager.save(Consumidor, consumidor);
-
-        return response.send(consumidor).status(200);
-    }
 
     async getByEmail(request: Request, response: Response) {
 

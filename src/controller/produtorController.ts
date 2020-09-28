@@ -7,9 +7,9 @@ class ProdutorController {
 
     async delete(request: Request, response: Response) {
 
-        const idUsuario = request.params
+        const idUsuario = request.params.idUsuario
 
-        const produtor = await getConnection().getRepository(Produtor).find(idUsuario)
+        const produtor = await getConnection().getRepository(Produtor).findOne(idUsuario)
 
         const resultDelete = await getConnection().getRepository(Produtor).remove(produtor)
 
@@ -25,9 +25,9 @@ class ProdutorController {
 
         const produtor: Produtor = request.body as Produtor;
 
-        await getConnection().manager.save(Produtor, produtor);
+        const produtorResult = await getConnection().getRepository(Produtor).save(produtor)
 
-        return response.send(produtor).status(200);
+        return response.send(produtorResult).status(200);
     }
 
     async getByEmail(request: Request, response: Response) {

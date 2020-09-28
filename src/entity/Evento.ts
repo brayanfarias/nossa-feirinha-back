@@ -20,9 +20,13 @@ export class Evento {
     @Column()
     longitude: string
     
-    @ManyToOne(type => Consumidor, consumidor => consumidor.eventos)  
+    @ManyToOne(type => Consumidor, consumidor => consumidor.eventos,{
+        eager: true,
+    })  
     criadorConsumidor: Consumidor;
 
-    @ManyToOne(type => Produtor, produtor => produtor.eventos)
+    @ManyToOne(type => Produtor, produtor => produtor.eventos, {
+        eager: true,
+    })
     criadorProdutor: Produtor;
 }
