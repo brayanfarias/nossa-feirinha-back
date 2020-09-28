@@ -1,19 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { Gondola } from "./Gondola";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Usuario } from "./Usuario";
 
 @Entity()
 export class Produto {
 
     @PrimaryGeneratedColumn("uuid")
-    idProdutor:string;
+    idProduto: string;
 
     @Column()
-    nome:string;
+    nome: string;
 
     @Column()
-    sistemaUnidade:string;
+    sistemaUnidade: string;
 
     @Column()
     imagem: string;
+
+    @ManyToOne(type => Usuario, usuario => usuario.produtos)
+    criador: Usuario;
 
 }

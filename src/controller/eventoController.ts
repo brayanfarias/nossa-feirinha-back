@@ -2,14 +2,7 @@
 import { Evento } from "../entity/Evento";
 import { getConnection } from "typeorm";
 import { Request, Response } from "express";
-import { Consumidor } from "../entity/Consumidor";
-import { Produtor } from "../entity/Produtor";
-import ConsumidorController from "./ConsumidorController";
-import ProdutorController from "./ProdutorController";
-
-const consumidorController = new ConsumidorController();
-const produtorController = new ProdutorController();
-
+import UsuarioController from "./UsuarioController";
 
 class EventoController {
 
@@ -37,29 +30,11 @@ class EventoController {
 
         const idUsuario: string = request.body.Criador.idUsuario;
 
-        let criadorConsumidor: Consumidor;
-        let criadorProdutor: Produtor;
+        const resultUsuario = await new UsuarioController().get(idUsuario)       
 
         const evento: Evento = request.body as Evento;
 
-        console.info("[INFO] Procurando pelo criador na tabela consumidor...");
-        criadorConsumidor = await consumidorController.getById(idUsuario);
-
-        if (criadorConsumidor) {
-            console.info("[INFO] Criador encontrado na tabela consumidor...");
-            evento.criadorConsumidor = criadorConsumidor;
-            evento.criadorProdutor = null;
-        } else {
-            console.info("[INFO] Consumidor não encontrado! Procurando pelo criador na tabela produtor...");
-            criadorProdutor = await produtorController.getById(idUsuario);
-            evento.criadorProdutor = criadorProdutor;
-            evento.criadorConsumidor = null;
-        }
-
-        if (!criadorConsumidor && !criadorProdutor) {
-            console.info("[INFO] Criador não encontrado nem na tabela Produtor nem na tabela Consumidor.");
-            return response.status(404).send("Não localizei o criador nem como Consumidor nem como Produtor.");
-        }
+        evento.criador = resultUsuario;      
 
         const result = await getConnection().getRepository(Evento).save(evento)
 

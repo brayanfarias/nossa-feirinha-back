@@ -1,6 +1,10 @@
-import { PrimaryGeneratedColumn, Column, OneToOne, JoinTable, JoinColumn } from 'typeorm'
+import { PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, Entity, TableInheritance } from 'typeorm'
 import { Endereco } from './Endereco';
+import { Evento } from './Evento';
+import { Produto } from './Produto';
 
+@Entity()
+@TableInheritance({ column: { type: 'varchar', name: 'tipo' } })
 export class Usuario {
 
     @PrimaryGeneratedColumn("uuid")
@@ -18,16 +22,22 @@ export class Usuario {
     @Column()
     senha: string;
 
-    @OneToOne(type => Endereco,{
+    @OneToOne(type => Endereco, {
         cascade: true,
         /**
          * @todo Implementar outra forma de deletar a linha do Endereco
          * @see https://github.com/typeorm/typeorm/issues/3218
          */
         onDelete: "CASCADE",
-        eager: true        
+        eager: true
     })
     @JoinColumn()
     endereco: Endereco
-    
+
+    @OneToMany(type => Produto, produto => produto.criador)
+    produtos: Produto[];
+
+    @OneToMany(type => Evento, evento => evento.criador)
+     eventos: Evento[]
+
 }
