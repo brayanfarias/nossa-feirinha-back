@@ -8,12 +8,11 @@ import GondolaController from './controller/GondolaController';
 
 const routes = express.Router();
 
-const consumidorController = new ConsumidorController()
-const produtorController = new ProdutorController()
+const consumidorController = new ConsumidorController();
+const produtorController = new ProdutorController();
 const eventoController =  new EventoController();
 const produtoController = new ProdutoController();
-
-const gondolaController = new GondolaController()
+const gondolaController = new GondolaController();
 
 routes.post('/consumidor', consumidorController.create);
 routes.get('/consumidor/:email', consumidorController.getByEmail);
@@ -30,7 +29,6 @@ routes.get('/evento/:idEvento', eventoController.get)
 routes.get('/evento/', eventoController.getAll)
 routes.delete('/evento/:idEvento', eventoController.delete)
 
-
 routes.post('/produto', produtoController.create)
 routes.get('/produto', produtoController.getAll)
 routes.get('/produto/:idUsuario', produtoController.getByProdutor)
@@ -38,5 +36,7 @@ routes.delete('/produto/:idProduto', produtoController.delete)
 
 routes.post('/gondola', gondolaController.create)
 routes.get('/gondola', gondolaController.getAll)
+routes.get('/gondola/:idGondola', gondolaController.get)
+routes.delete('/gondola/:idGondola', gondolaController.delete)
 
 export default routes;

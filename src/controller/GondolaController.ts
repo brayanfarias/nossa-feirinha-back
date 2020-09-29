@@ -8,9 +8,33 @@ import ProdutoController from "./ProdutoController";
 import ProdutorController from "./ProdutorController";
 
 export class GondolaController {
-    
-    async getAll() {
-        throw new Error('Method not implemented.');
+
+    async delete(request: Request, response: Response) {
+
+        const idGondola = request.params.idGondola
+
+        const gondola: Gondola = await getConnection().getRepository(Gondola).findOne(idGondola)
+
+        const result = await getConnection().getRepository(Gondola).remove(gondola)
+
+        return response.status(200).send(result)
+    }
+
+    async get(request: Request, response: Response) {
+
+        const idGondola = request.params.idGondola
+
+        const gondola = await getConnection().getRepository(Gondola).findOne(idGondola)
+
+        return response.status(200).send(gondola)
+
+    }
+
+    async getAll(request: Request, response: Response) {
+
+        const gondolas = await getConnection().getRepository(Gondola).find()
+
+        return response.status(200).send(gondolas)
     }
 
     async create(request: Request, response: Response) {
@@ -40,7 +64,7 @@ export class GondolaController {
 
         const result = await getConnection().getRepository(Gondola).save(gondola)
 
-        response.status(200).send(result)
+        return response.status(200).send(result)
     }
 }
 
