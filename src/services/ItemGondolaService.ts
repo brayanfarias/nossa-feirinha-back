@@ -3,18 +3,16 @@ import { ItemGondola } from "../entity/ItemGondola";
 
 export class ItemGondolaService {
 
-    async delete (itemGondola:ItemGondola){
-                
-        const result = await getConnection().getRepository(ItemGondola).remove(itemGondola);
+    async delete(itemGondola: ItemGondola): Promise<ItemGondola> {
 
-        return result;
+        return await getConnection().getRepository(ItemGondola).remove(itemGondola);
+
     }
 
-    async getById(idItemGondola:string){
+    async getById(idItemGondola: string): Promise<ItemGondola> {
 
-        const result = await getConnection().getRepository(ItemGondola).findOne(idItemGondola)
+        return await getConnection().getRepository(ItemGondola).findOne(idItemGondola)
 
-        return result;
     }
 
 }

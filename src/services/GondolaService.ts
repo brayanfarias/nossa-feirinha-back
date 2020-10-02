@@ -15,19 +15,16 @@ const produtoService = new ProdutoService();
 
 export class GondolaService {
 
-    async getById(idGondola: string) {
+    async getById(idGondola: string): Promise<Gondola> {
 
-        const result: Gondola = await getConnection().getRepository(Gondola).findOne(idGondola)
-
-        return result
+        return await getConnection().getRepository(Gondola).findOne(idGondola)
 
     }
 
-    async delete(gondola: Gondola) {
+    async delete(gondola: Gondola): Promise<Gondola> {
 
-        const result: Gondola = await getConnection().getRepository(Gondola).remove(gondola)
+        return await getConnection().getRepository(Gondola).remove(gondola)
 
-        return result;
     }
 
     async deleteItemGondolaRelation(gondola: Gondola) {
@@ -38,7 +35,9 @@ export class GondolaService {
     }
 
     async getAllGondolas(): Promise<Gondola[]> {
+
         return await getConnection().getRepository(Gondola).find();
+
     }
 
     async createGondola(idUsuario: string, itensGondola: ItemGondola[]): Promise<Gondola> {

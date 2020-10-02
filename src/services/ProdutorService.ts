@@ -4,10 +4,11 @@ import { Produtor } from "../entity/Produtor";
 
 export class ProdutorService {
 
-    async getById(idUsuario:string):Promise<Produtor> {
-        return await getConnection().getRepository(Produtor).findOne(idUsuario)       
-    } 
+    async getById(idUsuario: string): Promise<Produtor> {
 
+        return await getConnection().getRepository(Produtor).findOne(idUsuario)
+
+    }
 
 }
 
