@@ -4,6 +4,7 @@ import { Gondola } from "../entity/Gondola";
 import { ItemGondola } from "../entity/ItemGondola";
 import { Produto } from "../entity/Produto";
 import { Produtor } from "../entity/Produtor";
+import ItemGondolaController from "./ItemGondolaController";
 import ProdutoController from "./ProdutoController";
 import ProdutorController from "./ProdutorController";
 
@@ -11,9 +12,15 @@ export class GondolaController {
 
     async delete(request: Request, response: Response) {
 
+        const itemGondolaController = new ItemGondolaController();
+
         const idGondola = request.params.idGondola
 
         const gondola: Gondola = await getConnection().getRepository(Gondola).findOne(idGondola)
+
+        for (const itemGondola of gondola.itensGondola) {
+            await itemGondolaController.delete(itemGondola)            
+        }
 
         const result = await getConnection().getRepository(Gondola).remove(gondola)
 

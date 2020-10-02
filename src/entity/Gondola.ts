@@ -16,8 +16,7 @@ export class Gondola {
     produtor: Produtor;
 
     @OneToMany(type => ItemGondola, itemGondola => itemGondola.gondola, {
-        cascade: true,
-        onDelete: "CASCADE",
+        cascade: true,       
         eager: true
     })
     itensGondola: ItemGondola[] 
