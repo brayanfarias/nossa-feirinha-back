@@ -34,9 +34,9 @@ routes.get('/produto', produtoController.getAll)
 routes.get('/produto/:idUsuario', produtoController.getByProdutor)
 routes.delete('/produto/:idProduto', produtoController.delete)
 
-routes.post('/gondola', gondolaController.create)
-routes.get('/gondola', gondolaController.getAll)
-routes.get('/gondola/:idGondola', gondolaController.get)
-routes.delete('/gondola/:idGondola', gondolaController.delete)
+routes.post('/gondola', gondolaController.createGondola)
+routes.get('/gondola', gondolaController.getGondolas)
+routes.get('/gondola/:idGondola', gondolaController.getGondola)
+routes.delete('/gondola/:idGondola', gondolaController.deleteGondolaAndRelations)
 
 export default routes;

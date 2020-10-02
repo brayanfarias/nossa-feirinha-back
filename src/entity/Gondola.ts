@@ -9,7 +9,7 @@ export class Gondola {
     idGondola: string;
 
     @Column()
-    isExpostaPerfil: boolean;
+    isExpostaPerfil: boolean  = false;
 
     @ManyToOne(type => Produtor)
     @JoinColumn()

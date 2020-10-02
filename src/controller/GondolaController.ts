@@ -2,74 +2,49 @@ import { Request, Response } from "express";
 import { getConnection } from "typeorm";
 import { Gondola } from "../entity/Gondola";
 import { ItemGondola } from "../entity/ItemGondola";
-import { Produto } from "../entity/Produto";
-import { Produtor } from "../entity/Produtor";
-import ItemGondolaController from "./ItemGondolaController";
-import ProdutoController from "./ProdutoController";
-import ProdutorController from "./ProdutorController";
+import GondolaService from "../services/GondolaService";
+
+const gondolaService = new GondolaService();
 
 export class GondolaController {
 
-    async delete(request: Request, response: Response) {
-
-        const itemGondolaController = new ItemGondolaController();
+    async deleteGondolaAndRelations(request: Request, response: Response) {
 
         const idGondola = request.params.idGondola
 
-        const gondola: Gondola = await getConnection().getRepository(Gondola).findOne(idGondola)
+        const gondola: Gondola = await gondolaService.getById(idGondola)
 
-        for (const itemGondola of gondola.itensGondola) {
-            await itemGondolaController.delete(itemGondola)            
-        }
+        await gondolaService.deleteItemGondolaRelation(gondola)
 
-        const result = await getConnection().getRepository(Gondola).remove(gondola)
+        const result: Gondola = await gondolaService.delete(gondola)
 
         return response.status(200).send(result)
     }
 
-    async get(request: Request, response: Response) {
+    async getGondola(request: Request, response: Response) {
 
         const idGondola = request.params.idGondola
 
-        const gondola = await getConnection().getRepository(Gondola).findOne(idGondola)
+        const gondola = await gondolaService.getById(idGondola)
 
         return response.status(200).send(gondola)
 
     }
 
-    async getAll(request: Request, response: Response) {
+    async getGondolas(request: Request, response: Response) {
 
-        const gondolas = await getConnection().getRepository(Gondola).find()
+        const gondolas: Gondola[] = await gondolaService.getAllGondolas()
 
         return response.status(200).send(gondolas)
     }
 
-    async create(request: Request, response: Response) {
+    async createGondola(request: Request, response: Response) {
 
-        const idUsuario = request.body.Produtor.idUsuario
+        const idUsuario: string = request.body.Produtor.idUsuario
 
-        const produtor: Produtor = await new ProdutorController().getById(idUsuario);
+        const itensGondola: ItemGondola[] = request.body.itensGondola
 
-        const gondola = new Gondola();
-        gondola.itensGondola = [];
-
-        gondola.isExpostaPerfil = request.body.isExpostaPerfil
-
-        gondola.produtor = produtor;
-
-        const produtoController = new ProdutoController()
-
-        for (const index of request.body.itensGondola) {
-            const idProduto = index.idProduto;
-            const produto: Produto = await produtoController.getById(idProduto);
-
-            const itemGondola = new ItemGondola();
-            itemGondola.produto = produto;
-            itemGondola.quantidade = index.quantidade
-            gondola.itensGondola.push(itemGondola);
-        }
-
-        const result = await getConnection().getRepository(Gondola).save(gondola)
+        const result: Gondola = await gondolaService.createGondola(idUsuario, itensGondola)
 
         return response.status(200).send(result)
     }

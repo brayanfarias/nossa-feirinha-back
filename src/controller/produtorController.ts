@@ -47,12 +47,7 @@ class ProdutorController {
         return result;
     }
 
-    async getById(idUsuario:string) {
 
-        const produtor = await getConnection().getRepository(Produtor).findOne(idUsuario)
-        
-        return produtor;
-    }
 }
 
 export default ProdutorController;

@@ -1,19 +1,24 @@
 {
-  "isExpostaPerfil": true,
   "Produtor": {
-    "idUsuario": "xxxxxxxxxxxxxxxxxx"
+    "idUsuario": "eed53eb8-2c99-42f7-9c92-8593c5ea654b"
   },
   "itensGondola": [
     {
-      "idProduto": "xxxxxxxxxxxxxx",
+      "produto": {
+        "idProduto": "9b546740-80f0-4166-9b99-ea551a1fe5db"
+      },
       "quantidade": 12
     },
     {
-      "idProduto": "xxxxxxxxxxxxxx",
+      "produto": {
+        "idProduto": "696eb439-102c-4f07-85c3-ac6d32638226"
+      },
       "quantidade": 10
     },
     {
-      "idProduto": "xxxxxxxxxxxxxx",
+      "produto": {
+        "idProduto": "20e6a502-3a71-4f0f-8760-4e76d0ce0a22"
+      },
       "quantidade": 8
     }
   ]
