@@ -15,6 +15,11 @@ const produtoService = new ProdutoService();
 
 export class GondolaService {
 
+    async getByProdutor(produtor: Produtor): Promise<Gondola[]> {
+
+        return await getConnection().getRepository(Gondola).find({where: {produtor: produtor}})
+    }
+
     async getById(idGondola: string): Promise<Gondola> {
 
         return await getConnection().getRepository(Gondola).findOne(idGondola)

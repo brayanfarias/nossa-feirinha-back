@@ -1,4 +1,5 @@
 import { getConnection } from "typeorm";
+import { Gondola } from "../entity/Gondola";
 import { ItemGondola } from "../entity/ItemGondola";
 
 export class ItemGondolaService {
@@ -12,6 +13,18 @@ export class ItemGondolaService {
     async getById(idItemGondola: string): Promise<ItemGondola> {
 
         return await getConnection().getRepository(ItemGondola).findOne(idItemGondola)
+
+    }
+
+    async deleteItemGondolaFromGondola(gondola: Gondola, itemGondola: ItemGondola) {
+        
+        for (const item of gondola.itensGondola) {
+
+            if (item.idItemGondola === itemGondola.idItemGondola) {
+                await this.delete(itemGondola)
+            }
+    
+        }
 
     }
 

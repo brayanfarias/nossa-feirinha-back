@@ -1,14 +1,32 @@
 import { Request, Response } from "express";
-import { getConnection } from "typeorm";
 import { Gondola } from "../entity/Gondola";
 import { ItemGondola } from "../entity/ItemGondola";
 import GondolaService from "../services/GondolaService";
+import ItemGondolaService from "../services/ItemGondolaService";
 
+const itemGondolaService = new ItemGondolaService()
 const gondolaService = new GondolaService();
 
 export class GondolaController {
 
-    async deleteGondolaAndRelations(request: Request, response: Response) {
+    async deleteItemGondolaFromGondola(request: Request, response: Response) {
+
+        const idGondola = request.params.idGondola
+
+        const idItemGondola = request.params.idItemGondola;
+
+        let gondola: Gondola = await gondolaService.getById(idGondola)
+
+        const itemGondola: ItemGondola = await itemGondolaService.getById(idItemGondola)
+
+        await itemGondolaService.deleteItemGondolaFromGondola(gondola, itemGondola)
+
+        gondola = await gondolaService.getById(idGondola);
+
+        return response.status(200).send(gondola)
+    }
+
+    async deleteGondolaAndItsRelations(request: Request, response: Response) {
 
         const idGondola = request.params.idGondola
 

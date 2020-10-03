@@ -21,6 +21,7 @@ routes.delete('/consumidor/:idUsuario', consumidorController.delete)
 
 routes.post('/produtor', produtorController.create);
 routes.get('/produtor/:email', produtorController.getByEmail);
+routes.get('/produtor/:idUsuario/gondola', produtorController.getGondolasFromThisProdutor)
 routes.patch('/produtor', produtorController.update)
 routes.delete('/produtor/:idUsuario', produtorController.delete)
 
@@ -37,6 +38,8 @@ routes.delete('/produto/:idProduto', produtoController.delete)
 routes.post('/gondola', gondolaController.createGondola)
 routes.get('/gondola', gondolaController.getGondolas)
 routes.get('/gondola/:idGondola', gondolaController.getGondola)
-routes.delete('/gondola/:idGondola', gondolaController.deleteGondolaAndRelations)
+routes.get('/gondola/')
+routes.delete('/gondola/:idGondola', gondolaController.deleteGondolaAndItsRelations)
+routes.delete('/gondola/:idGondola/item-gondola/:idItemGondola', gondolaController.deleteItemGondolaFromGondola)
 
 export default routes;
