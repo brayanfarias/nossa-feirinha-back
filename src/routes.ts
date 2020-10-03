@@ -38,7 +38,6 @@ routes.delete('/produto/:idProduto', produtoController.delete)
 routes.post('/gondola', gondolaController.createGondola)
 routes.get('/gondola', gondolaController.getGondolas)
 routes.get('/gondola/:idGondola', gondolaController.getGondola)
-routes.get('/gondola/')
 routes.delete('/gondola/:idGondola', gondolaController.deleteGondolaAndItsRelations)
 routes.delete('/gondola/:idGondola/item-gondola/:idItemGondola', gondolaController.deleteItemGondolaFromGondola)
 
