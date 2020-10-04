@@ -9,6 +9,9 @@ export class Gondola {
     idGondola: string;
 
     @Column()
+    nome: string;
+
+    @Column()
     isExpostaPerfil: boolean  = false;
 
     @ManyToOne(type => Produtor)

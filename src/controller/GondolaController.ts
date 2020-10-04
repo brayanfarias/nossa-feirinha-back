@@ -58,11 +58,13 @@ export class GondolaController {
 
     async createGondola(request: Request, response: Response) {
 
+        const nome: string = request.body.nome
+
         const idUsuario: string = request.body.Produtor.idUsuario
 
         const itensGondola: ItemGondola[] = request.body.itensGondola
 
-        const result: Gondola = await gondolaService.createGondola(idUsuario, itensGondola)
+        const result: Gondola = await gondolaService.createGondola(nome, idUsuario, itensGondola)
 
         return response.status(200).send(result)
     }

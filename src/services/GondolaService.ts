@@ -45,7 +45,7 @@ export class GondolaService {
 
     }
 
-    async createGondola(idUsuario: string, itensGondola: ItemGondola[]): Promise<Gondola> {
+    async createGondola(nome: string, idUsuario: string, itensGondola: ItemGondola[]): Promise<Gondola> {
 
         const produtor: Produtor = await produtorService.getById(idUsuario)
 
@@ -54,6 +54,8 @@ export class GondolaService {
         gondola.itensGondola = [];
 
         gondola.produtor = produtor;
+
+        gondola.nome = nome
 
         for (const index of itensGondola) {
             const idProduto = index.produto.idProduto;
