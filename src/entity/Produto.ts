@@ -18,4 +18,7 @@ export class Produto {
 
     @ManyToOne(type => Usuario, usuario => usuario.produtos)
     criador: Usuario;
+
+    @Column()
+    tipo: string;
 }
