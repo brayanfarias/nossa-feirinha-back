@@ -3,6 +3,7 @@
     "nome": "Nome_Produto",
     "sistemaUnidade":"Sistema_unidade",
     "imagem":"hex64_imagem",
+    "tipo":"tipo_produto",
     "Criador":{
         "idUsuario":"3c7c9a64-0bf5-4f90-9412-514f594e0661"
     }

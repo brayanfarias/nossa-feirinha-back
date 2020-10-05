@@ -6,6 +6,8 @@ import UsuarioController from "./UsuarioController";
 
 export class ProdutoController {
 
+    
+
     async delete(request: Request, response: Response) {
       
         const idProduto = request.params.idProduto

@@ -6,6 +6,13 @@ import UsuarioController from "./UsuarioController";
 
 class EventoController {
 
+    async getAll(request: Request, response: Response) {
+
+        const eventos = await getConnection().getRepository(Evento).find();
+
+        return response.status(200).send(eventos)
+    }
+
     async delete(request: Request, response: Response) {
 
         const idEvento = request.params.idEvento;
