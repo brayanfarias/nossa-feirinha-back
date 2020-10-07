@@ -27,7 +27,7 @@ routes.delete('/produtor/:idUsuario', produtorController.delete)
 
 routes.post('/evento', eventoController.createEvento);
 routes.get('/evento/:idEvento', eventoController.getEvento)
-routes.get('/evento/', eventoController.getEventos)
+routes.get('/evento', eventoController.getEventosAtivos)
 routes.delete('/evento/:idEvento', eventoController.deleteEventoAndItsRelations)
 
 routes.post('/produto', produtoController.create)

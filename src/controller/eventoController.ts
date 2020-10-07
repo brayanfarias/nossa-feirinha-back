@@ -13,13 +13,13 @@ const enderecoService = new EnderecoService()
 
 class EventoController {
 
-    async getEventos(request: Request, response: Response) {
+    async getEventosAtivos(request: Request, response: Response) {
 
-        const eventos = await eventoService.getAllEventos();
+        const eventosAtivos: Evento[] = await eventoService.getAllEventosAtivos();
 
-        return response.status(200).send(eventos)
+        return response.status(200).send(eventosAtivos)
+
     }
-
 
     async deleteEventoAndItsRelations(request: Request, response: Response) {
 
