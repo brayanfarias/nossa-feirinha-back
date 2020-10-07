@@ -22,7 +22,7 @@ export class GondolaService {
 
     async getById(idGondola: string): Promise<Gondola> {
 
-        return await getConnection().getRepository(Gondola).findOne(idGondola)
+        return await getConnection().getRepository(Gondola).findOne(idGondola, {relations : ['produtor']})
 
     }
 
