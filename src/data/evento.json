@@ -1,6 +1,6 @@
 {
 	"nome": "Nome_Evento",
-	"dataEvento": "Data_Evento",
+	"dataEvento": "2020-10-07T00:06:15-03:00",
 	"latitude": "Latitude_Evento",
 	"longitude": "Longitude_Evento",
     "descricao": "Descrição do evento",
