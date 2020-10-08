@@ -25,10 +25,10 @@ routes.get('/produtor/:idUsuario/gondola', produtorController.getGondolasFromThi
 routes.patch('/produtor', produtorController.update)
 routes.delete('/produtor/:idUsuario', produtorController.delete)
 
-routes.post('/evento', eventoController.create);
-routes.get('/evento/:idEvento', eventoController.get)
-routes.get('/evento/', eventoController.getAll)
-routes.delete('/evento/:idEvento', eventoController.delete)
+routes.post('/evento', eventoController.createEvento);
+routes.get('/evento/:idEvento', eventoController.getEvento)
+routes.get('/evento', eventoController.getEventosAtivos)
+routes.delete('/evento/:idEvento', eventoController.deleteEventoAndItsRelations)
 
 routes.post('/produto', produtoController.create)
 routes.get('/produto', produtoController.getAll)

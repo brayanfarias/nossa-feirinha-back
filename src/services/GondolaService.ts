@@ -3,8 +3,8 @@ import { Gondola } from "../entity/Gondola"
 import { ItemGondola } from "../entity/ItemGondola";
 import { Produto } from "../entity/Produto";
 import { Produtor } from "../entity/Produtor";
-import ItemGondolaService from "../services/ItemGondolaService";
-import ProdutorService from "../services/ProdutorService";
+import ItemGondolaService from "./ItemGondolaService";
+import ProdutorService from "./ProdutorService";
 import { ProdutoService } from "./ProdutoService";
 
 const itemGondolaService = new ItemGondolaService();

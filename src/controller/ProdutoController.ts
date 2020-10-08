@@ -1,12 +1,11 @@
 import { Request, Response } from "express";
 import { getConnection } from "typeorm";
 import { Produto } from "../entity/Produto";
-import UsuarioController from "./UsuarioController";
+import UsuarioService from "../services/UsuarioService";
 
+const usuarioService = new UsuarioService();
 
-export class ProdutoController {
-
-    
+export class ProdutoController {    
 
     async delete(request: Request, response: Response) {
       
@@ -42,7 +41,7 @@ export class ProdutoController {
     
         const idUsuario = request.body.Criador.idUsuario
 
-        const criadorResult = await new UsuarioController().get(idUsuario)
+        const criadorResult = await usuarioService.getById(idUsuario)
         
         const produto : Produto = request.body
         

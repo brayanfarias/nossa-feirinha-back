@@ -29,12 +29,6 @@ export class Evento {
     criador: Usuario;
 
     @OneToOne(type => Endereco, {
-        cascade: true,
-        /**
-         * @todo Implementar outra forma de deletar a linha do Endereco
-         * @see https://github.com/typeorm/typeorm/issues/3218
-         */
-        onDelete: "CASCADE",
         eager: true
     })
     @JoinColumn()
