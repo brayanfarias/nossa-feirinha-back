@@ -12,7 +12,19 @@ const usuarioService = new UsuarioService()
 
 export class AssinaturaController {
 
-    async create(request: Request, response: Response) {
+    async desassinarEvento(request: Request, response: Response) {
+
+        const idAssinatura = request.params.idAssinatura;
+
+        let assinatura: Assinatura = await assinaturaService.getById(idAssinatura);
+
+        assinatura = await assinaturaService.settingDesassinar(assinatura)
+
+        return response.status(200).send(assinatura)
+
+    }
+
+    async createAssinatura(request: Request, response: Response) {
 
         const idEvento = request.body.Evento.idEvento
 

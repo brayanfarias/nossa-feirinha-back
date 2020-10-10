@@ -7,6 +7,20 @@ import moment = require('moment');
 
 export class AssinaturaService {
 
+    async settingDesassinar(assinatura: Assinatura): Promise<Assinatura> {
+
+        assinatura.isAtiva = false
+        assinatura.dataDesassinatura = moment().format()
+
+        return await getConnection().getRepository(Assinatura).save(assinatura)
+
+    }
+
+    async getById(idAssinatura: string): Promise<Assinatura> {
+
+        return await getConnection().getRepository(Assinatura).findOne(idAssinatura)
+    }
+
     async createAssinatura(evento: Evento, usuario: Usuario): Promise<Assinatura> {
 
         const assinatura = new Assinatura();

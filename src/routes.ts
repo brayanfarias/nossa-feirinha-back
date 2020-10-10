@@ -43,6 +43,7 @@ routes.get('/gondola/:idGondola', gondolaController.getGondola)
 routes.delete('/gondola/:idGondola', gondolaController.deleteGondolaAndItsRelations)
 routes.delete('/gondola/:idGondola/item-gondola/:idItemGondola', gondolaController.deleteItemGondolaFromGondola)
 
-routes.post('/assinatura', assinaturaController.create)
+routes.post('/assinatura', assinaturaController.createAssinatura)
+routes.patch('/assinatura/:idAssinatura/desassinar', assinaturaController.desassinarEvento)
 
 export default routes;
