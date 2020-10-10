@@ -1,8 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm";
 import { Usuario } from "./Usuario";
 import { Evento } from "./Evento";
-import { Consumidor } from "./Consumidor";
-import { Produtor } from "./Produtor";
 
 @Entity()
 export class Assinatura {
@@ -14,7 +12,7 @@ export class Assinatura {
     @JoinColumn()
     evento:Evento;
 
-    @OneToOne(type => Produtor || Consumidor)
+    @OneToOne(type => Usuario)
     @JoinColumn()
     usuario:Usuario;
 
@@ -25,6 +23,6 @@ export class Assinatura {
     dataDesassinatura:string;
 
     @Column()
-    isAtiva: boolean;
+    isAtiva: boolean = true;
 
 }
