@@ -15,7 +15,7 @@ export class AssinaturaService {
 
         assinatura.usuario = usuario;
 
-        assinatura.dataDesassinatura = moment().format();
+        assinatura.dataAssinatura = moment().format();
 
         return await getConnection().getRepository(Assinatura).save(assinatura);
 

@@ -6,21 +6,21 @@ import { Evento } from "./Evento";
 export class Assinatura {
 
     @PrimaryGeneratedColumn("uuid")
-    idAssinatura:string;
+    idAssinatura: string;
 
     @OneToOne(type => Evento)
     @JoinColumn()
-    evento:Evento;
+    evento: Evento;
 
     @OneToOne(type => Usuario)
     @JoinColumn()
-    usuario:Usuario;
+    usuario: Usuario;
 
     @Column()
     dataAssinatura: string;
 
-    @Column()
-    dataDesassinatura:string;
+    @Column({ nullable: true })
+    dataDesassinatura: string;
 
     @Column()
     isAtiva: boolean = true;
