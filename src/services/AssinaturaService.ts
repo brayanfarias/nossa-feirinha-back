@@ -6,6 +6,15 @@ import moment = require('moment');
 
 
 export class AssinaturaService {
+    async getAssinaturaWithRelation(idAssinatura: string, relation: string): Promise<Assinatura> {
+        return await getConnection().getRepository(Assinatura).findOne(idAssinatura, {relations: [`${relation}`]})
+    }
+
+    async getByEvento(evento: Evento): Promise<Assinatura[]> {
+
+        return await getConnection().getRepository(Assinatura).find({ where: { evento: evento } })
+
+    }
 
     async getByUsuarioFilteredByIsAtiva(usuario: Usuario, isAtiva: boolean): Promise<Assinatura[]> {
 
@@ -26,7 +35,7 @@ export class AssinaturaService {
         return getConnection().getRepository(Assinatura).find({ where: { usuario: usuario } })
 
     }
-    
+
     async settingReassinar(assinatura: Assinatura): Promise<Assinatura> {
 
         assinatura.isAtiva = true;

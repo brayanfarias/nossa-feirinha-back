@@ -10,9 +10,8 @@ const assinaturaService = new AssinaturaService();
 const eventoService = new EventoService()
 const usuarioService = new UsuarioService()
 
-export class AssinaturaController {
+export class AssinaturaController {  
  
-
     async getAllByUsuario(request: Request, response: Response) {
 
         const idUsuario = request.params.idUsuario

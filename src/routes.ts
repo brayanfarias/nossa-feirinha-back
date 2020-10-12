@@ -31,6 +31,7 @@ routes.post('/evento', eventoController.createEvento);
 routes.get('/evento/:idEvento', eventoController.getEvento)
 routes.get('/evento', eventoController.getEventosAtivos)
 routes.delete('/evento/:idEvento', eventoController.deleteEventoAndItsRelations)
+routes.get('/evento/:idEvento/get-subscribers', eventoController.getSubscribers)
 
 routes.post('/produto', produtoController.create)
 routes.get('/produto', produtoController.getAll)
@@ -47,5 +48,6 @@ routes.post('/assinatura', assinaturaController.createAssinatura)
 routes.patch('/assinatura/:idAssinatura/desassinar', assinaturaController.desassinarEvento)
 routes.patch('/assinatura/:idAssinatura/reassinar', assinaturaController.reassinarEvento)
 routes.get('/assinatura/:idUsuario/?', assinaturaController.getAllByUsuario)
+
 
 export default routes;
