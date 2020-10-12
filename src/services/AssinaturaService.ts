@@ -11,16 +11,13 @@ export class AssinaturaService {
 
         const assinaturas: Assinatura[] = await this.allByUsuario(usuario)
 
-
-        for (const assinatura of assinaturas) {
-
-            if (assinatura.isAtiva == !isAtiva) {
-                assinaturas.splice(assinaturas.indexOf(assinatura), 1)
+        const result = assinaturas.filter(assinatura => {
+            if (assinatura.isAtiva == isAtiva) {
+                return assinatura;
             }
+        })
 
-        }
-
-        return assinaturas;
+        return result;
 
     }
 

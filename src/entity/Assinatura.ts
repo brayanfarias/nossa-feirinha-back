@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne, ManyToOne } from "typeorm";
 import { Usuario } from "./Usuario";
 import { Evento } from "./Evento";
 
@@ -12,7 +12,7 @@ export class Assinatura {
     @JoinColumn()
     evento: Evento;
 
-    @OneToOne(type => Usuario)
+    @ManyToOne(type => Usuario)
     @JoinColumn()
     usuario: Usuario;
 
