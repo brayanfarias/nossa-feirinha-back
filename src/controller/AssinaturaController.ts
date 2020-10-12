@@ -11,6 +11,33 @@ const eventoService = new EventoService()
 const usuarioService = new UsuarioService()
 
 export class AssinaturaController {
+ 
+
+    async getAllByUsuario(request: Request, response: Response) {
+
+        const idUsuario = request.params.idUsuario
+
+        const usuario: Usuario = await usuarioService.getById(idUsuario)
+
+        let queryIsAtiva = request.query.isAtiva
+
+        const isAtiva: boolean = queryIsAtiva == 'true'
+
+        let assinaturas: Assinatura[]
+
+        if (queryIsAtiva) {
+
+            assinaturas = await assinaturaService.getByUsuarioFilteredByIsAtiva(usuario, isAtiva)
+
+            return response.status(200).send(assinaturas)
+        } else {
+            assinaturas = await assinaturaService.allByUsuario(usuario)
+
+            return response.status(200).send(assinaturas)
+
+        }
+
+    }
 
     async reassinarEvento(request: Request, response: Response) {
 

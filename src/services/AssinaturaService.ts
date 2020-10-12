@@ -6,6 +6,29 @@ import moment = require('moment');
 
 
 export class AssinaturaService {
+
+    async getByUsuarioFilteredByIsAtiva(usuario: Usuario, isAtiva: boolean): Promise<Assinatura[]> {
+
+        const assinaturas: Assinatura[] = await this.allByUsuario(usuario)
+
+
+        for (const assinatura of assinaturas) {
+
+            if (assinatura.isAtiva == !isAtiva) {
+                assinaturas.splice(assinaturas.indexOf(assinatura), 1)
+            }
+
+        }
+
+        return assinaturas;
+
+    }
+
+    async allByUsuario(usuario: Usuario): Promise<Assinatura[]> {
+
+        return getConnection().getRepository(Assinatura).find({ where: { usuario: usuario } })
+
+    }
     
     async settingReassinar(assinatura: Assinatura): Promise<Assinatura> {
 

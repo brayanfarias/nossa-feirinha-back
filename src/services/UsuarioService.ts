@@ -5,11 +5,9 @@ export class UsuarioService {
 
     async getById(idUsuario: string): Promise<Usuario> {
 
-        return await getConnection().getRepository(Usuario).findOne(idUsuario)      
-        
+        return await getConnection().getRepository(Usuario).findOne(idUsuario)
+
     }
-
-
 
 }
 

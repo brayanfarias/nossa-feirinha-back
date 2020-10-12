@@ -46,5 +46,6 @@ routes.delete('/gondola/:idGondola/item-gondola/:idItemGondola', gondolaControll
 routes.post('/assinatura', assinaturaController.createAssinatura)
 routes.patch('/assinatura/:idAssinatura/desassinar', assinaturaController.desassinarEvento)
 routes.patch('/assinatura/:idAssinatura/reassinar', assinaturaController.reassinarEvento)
+routes.get('/assinatura/:idUsuario/search?isAtiva', assinaturaController.getAllByUsuario)
 
 export default routes;
