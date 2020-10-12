@@ -6,6 +6,16 @@ import moment = require('moment');
 
 
 export class AssinaturaService {
+    
+    async settingReassinar(assinatura: Assinatura): Promise<Assinatura> {
+
+        assinatura.isAtiva = true;
+        assinatura.dataAssinatura = moment().format();
+        assinatura.dataDesassinatura = null;
+
+        return await getConnection().getRepository(Assinatura).save(assinatura)
+
+    }
 
     async settingDesassinar(assinatura: Assinatura): Promise<Assinatura> {
 
