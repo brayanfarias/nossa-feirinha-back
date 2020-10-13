@@ -6,12 +6,29 @@ import UsuarioService from "../services/UsuarioService";
 import { Usuario } from "../entity/Usuario";
 import { Endereco } from "../entity/Endereco";
 import EnderecoService from "../services/EnderecoService";
+import { Assinatura } from "../entity/Assinatura";
+import AssinaturaService from "../services/AssinaturaService";
 
 const eventoService = new EventoService();
 const usuarioService = new UsuarioService();
 const enderecoService = new EnderecoService()
+const assinaturaService = new AssinaturaService()
 
 class EventoController {
+    
+    async getSubscribers(request: Request, response: Response) {
+
+        const idEvento = request.params.idEvento
+
+        const evento:Evento = await eventoService.getById(idEvento)
+
+        const assinaturas: Assinatura[] = await assinaturaService.getByEvento(evento)
+        
+        const usuarios:Usuario [] = await usuarioService.extractUsersFromAssinatura(assinaturas)
+
+        return response.status(200).send(usuarios)
+        
+    }
 
     async getEventosAtivos(request: Request, response: Response) {
 

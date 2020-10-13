@@ -1,30 +1,28 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinColumn, OneToOne, ManyToOne } from "typeorm";
 import { Usuario } from "./Usuario";
 import { Evento } from "./Evento";
-import { Consumidor } from "./Consumidor";
-import { Produtor } from "./Produtor";
 
 @Entity()
 export class Assinatura {
 
     @PrimaryGeneratedColumn("uuid")
-    idAssinatura:string;
+    idAssinatura: string;
 
-    @OneToOne(type => Evento)
+    @ManyToOne(type => Evento)
     @JoinColumn()
-    evento:Evento;
+    evento: Evento;
 
-    @OneToOne(type => Produtor || Consumidor)
+    @ManyToOne(type => Usuario)
     @JoinColumn()
-    usuario:Usuario;
+    usuario: Usuario;
 
     @Column()
     dataAssinatura: string;
 
-    @Column()
-    dataDesassinatura:string;
+    @Column({ nullable: true })
+    dataDesassinatura: string;
 
     @Column()
-    isAtiva: boolean;
+    isAtiva: boolean = true;
 
 }

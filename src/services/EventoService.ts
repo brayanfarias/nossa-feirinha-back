@@ -15,19 +15,14 @@ export class EventoService {
 
       const horaAtual = moment().format();
 
-      for (const evento of eventos) {
-
+      const result = eventos.filter(evento => {
          const horaEvento = moment(evento.dataEvento).format();
-
-         if (horaEvento < horaAtual) {
-
-            eventos.splice(eventos.indexOf(evento), 1)
-            
+         if (horaEvento > horaAtual) {
+            return evento;
          }
+      })
 
-      }
-
-      return eventos;
+      return result;
 
    }
 
