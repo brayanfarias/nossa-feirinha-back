@@ -25,7 +25,8 @@ export class AssinaturaController {
         if (queryIsAtiva) {
             
             const isAtiva: boolean = queryIsAtiva == 'true'
-            assinaturas = await assinaturaService.getByUsuarioFilteredByIsAtiva(usuario, isAtiva)
+            assinaturas = await assinaturaService.allByUsuario(usuario)
+            assinaturas =  await assinaturaService.FilterByIsAtiva(assinaturas, isAtiva)
 
             return response.status(200).send(assinaturas)
         } else {
