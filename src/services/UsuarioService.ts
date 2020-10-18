@@ -14,9 +14,9 @@ export class UsuarioService {
         const relation : string = 'usuario'
 
         for (const assinatura of assinaturas) {
-            const result : Assinatura = await assinaturaService.getAssinaturaWithRelation(assinatura.idAssinatura, relation)
+            const assinaturaRetornada : Assinatura = await assinaturaService.getAssinaturaWithRelation(assinatura.idAssinatura, relation)
             
-            usuarios.push(result.usuario)
+            usuarios.push(assinaturaRetornada.usuario)
             
         }
        

@@ -20,16 +20,16 @@ export class AssinaturaController {
 
         let queryIsAtiva = request.query.isAtiva
         
-        let assinaturas: Assinatura[]
-        
+        let assinaturas: Assinatura[] = await assinaturaService.allByUsuario(usuario)
+
         if (queryIsAtiva) {
             
             const isAtiva: boolean = queryIsAtiva == 'true'
-            assinaturas = await assinaturaService.getByUsuarioFilteredByIsAtiva(usuario, isAtiva)
+           
+            assinaturas =  await assinaturaService.FilterByIsAtiva(assinaturas, isAtiva)
 
             return response.status(200).send(assinaturas)
         } else {
-            assinaturas = await assinaturaService.allByUsuario(usuario)
 
             return response.status(200).send(assinaturas)
 

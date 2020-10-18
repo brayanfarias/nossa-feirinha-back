@@ -6,6 +6,19 @@ import moment = require('moment');
 
 
 export class AssinaturaService {
+    
+    async FilterByIsAtiva(assinaturas: Assinatura[], isAtiva: boolean): Promise<Assinatura[]> {
+
+        const result = assinaturas.filter(assinatura => {
+            if (assinatura.isAtiva == isAtiva) {
+                return assinatura;
+            }
+        })
+
+        return result;
+
+    }
+
     async getAssinaturaWithRelation(idAssinatura: string, relation: string): Promise<Assinatura> {
         return await getConnection().getRepository(Assinatura).findOne(idAssinatura, {relations: [`${relation}`]})
     }
@@ -20,11 +33,7 @@ export class AssinaturaService {
 
         const assinaturas: Assinatura[] = await this.allByUsuario(usuario)
 
-        const result = assinaturas.filter(assinatura => {
-            if (assinatura.isAtiva == isAtiva) {
-                return assinatura;
-            }
-        })
+        const result = await this.FilterByIsAtiva(assinaturas, isAtiva)
 
         return result;
 
