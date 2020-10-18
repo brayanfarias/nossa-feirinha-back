@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { request, Request, Response } from "express";
 import { Evento } from "../entity/Evento";
 import { Exposicao } from "../entity/Exposicao";
 import { Gondola } from "../entity/Gondola";
@@ -11,6 +11,16 @@ const eventoService = new EventoService()
 const exposicaoService = new ExposicaoService()
 
 export class ExposicaoController {
+
+    async deleteExposicao(request: Request, response: Response) {
+        const idExposicao = request.params.idExposicao
+
+        const exposicao:Exposicao = await exposicaoService.getById(idExposicao)
+
+        const result = await exposicaoService.deleteExposicao(exposicao)
+
+        return response.status(200).send(result)
+    }
 
     async createExposicao(request: Request, response: Response) {
 

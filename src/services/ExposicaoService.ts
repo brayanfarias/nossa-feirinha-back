@@ -8,6 +8,10 @@ const gondolaService = new GondolaService();
 
 export class ExposicaoService {
 
+    async deleteExposicao(exposicao:Exposicao) {
+        return getConnection().getRepository(Exposicao).remove(exposicao)
+    }
+
     RELATION = {
         GONDOLA: 'gondola',
         EVENTO: 'evento'
