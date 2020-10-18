@@ -46,6 +46,7 @@ routes.get('/gondola', gondolaController.getGondolas)
 routes.get('/gondola/:idGondola', gondolaController.getGondola)
 routes.delete('/gondola/:idGondola', gondolaController.deleteGondolaAndItsRelations)
 routes.delete('/gondola/:idGondola/item-gondola/:idItemGondola', gondolaController.deleteItemGondolaFromGondola)
+routes.get('/gondola/:idGondola/get-eventos', gondolaController.getAllEventos)
 
 routes.post('/assinatura', assinaturaController.createAssinatura)
 routes.patch('/assinatura/:idAssinatura/desassinar', assinaturaController.desassinarEvento)

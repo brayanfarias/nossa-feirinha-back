@@ -7,11 +7,16 @@ import GondolaService from "./GondolaService";
 const gondolaService = new GondolaService();
 
 export class ExposicaoService {
-    
+
     RELATION = {
-        GONDOLA :'gondola',
-        EVENTO : 'evento'
+        GONDOLA: 'gondola',
+        EVENTO: 'evento'
     }
+
+    async getByIdGondola(idGondola: string): Promise<Exposicao[]> {
+        return await getConnection().getRepository(Exposicao).find({ where: { gondola: idGondola } })
+    }
+    
 
     async getByIdEvento(idEvento: string): Promise<Exposicao[]> {
         return await getConnection().getRepository(Exposicao).find({where: {evento: idEvento}})
