@@ -8,7 +8,7 @@ export class Assinatura {
     @PrimaryGeneratedColumn("uuid")
     idAssinatura: string;
 
-    @ManyToOne(type => Evento)
+    @ManyToOne(type => Evento, { eager: true })
     @JoinColumn()
     evento: Evento;
 
