@@ -8,13 +8,29 @@ import { Endereco } from "../entity/Endereco";
 import EnderecoService from "../services/EnderecoService";
 import { Assinatura } from "../entity/Assinatura";
 import AssinaturaService from "../services/AssinaturaService";
+import { Exposicao } from "../entity/Exposicao";
+import ExposicaoService from "../services/ExposicaoService";
+import { Gondola } from "../entity/Gondola";
 
 const eventoService = new EventoService();
 const usuarioService = new UsuarioService();
 const enderecoService = new EnderecoService()
 const assinaturaService = new AssinaturaService()
+const exposicaoService = new ExposicaoService()
 
 class EventoController {
+
+    async getAllGondolas(request: Request, response: Response) {
+
+        const idEvento = request.params.idEvento
+
+        const exposicoes: Exposicao[] = await exposicaoService.getByIdEvento(idEvento)
+
+        const gondolas:Gondola[] = await exposicaoService.extrairRetornarRelation(exposicoes, exposicaoService.RELATION.GONDOLA)
+
+        return response.status(200).send(gondolas)
+
+    }
     
     async getSubscribersAtivos(request: Request, response: Response) {
 

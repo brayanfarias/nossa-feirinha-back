@@ -34,6 +34,7 @@ routes.get('/evento/:idEvento', eventoController.getEvento)
 routes.get('/evento', eventoController.getEventosAtivos)
 routes.delete('/evento/:idEvento', eventoController.deleteEventoAndItsRelations)
 routes.get('/evento/:idEvento/get-subscribers', eventoController.getSubscribersAtivos)
+routes.get('/evento/:idEvento/get-gondolas', eventoController.getAllGondolas)
 
 routes.post('/produto', produtoController.create)
 routes.get('/produto', produtoController.getAll)

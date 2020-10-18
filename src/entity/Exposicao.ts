@@ -8,11 +8,15 @@ export class Exposicao {
     @PrimaryGeneratedColumn("uuid")
     idExposicao: string;
 
-    @ManyToOne(type => Gondola)
+    @ManyToOne(type => Gondola, {
+        eager: true
+    })
     @JoinColumn()
     gondola: Gondola;
 
-    @ManyToOne(type => Evento)
+    @ManyToOne(type => Evento,{
+        eager: true
+    })
     @JoinColumn()
     evento: Evento;
 
