@@ -6,6 +6,7 @@ import ProdutorController from "./controller/ProdutorController";
 import ProdutoController from './controller/ProdutoController';
 import GondolaController from './controller/GondolaController';
 import AssinaturaController from './controller/AssinaturaController';
+import ExposicaoController from './controller/ExposicaoController';
 
 const routes = express.Router();
 
@@ -15,6 +16,7 @@ const eventoController =  new EventoController();
 const produtoController = new ProdutoController();
 const gondolaController = new GondolaController();
 const assinaturaController = new AssinaturaController()
+const exposicaoController = new ExposicaoController()
 
 routes.post('/consumidor', consumidorController.create);
 routes.get('/consumidor/:email', consumidorController.getByEmail);
@@ -48,6 +50,8 @@ routes.post('/assinatura', assinaturaController.createAssinatura)
 routes.patch('/assinatura/:idAssinatura/desassinar', assinaturaController.desassinarEvento)
 routes.patch('/assinatura/:idAssinatura/reassinar', assinaturaController.reassinarEvento)
 routes.get('/assinatura/:idUsuario/?', assinaturaController.getAllByUsuario)
+
+routes.post('/exposicao', exposicaoController.createExposicao)
 
 
 export default routes;
