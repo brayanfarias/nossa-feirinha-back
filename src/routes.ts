@@ -6,6 +6,7 @@ import ProdutorController from "./controller/ProdutorController";
 import ProdutoController from './controller/ProdutoController';
 import GondolaController from './controller/GondolaController';
 import AssinaturaController from './controller/AssinaturaController';
+import ExposicaoController from './controller/ExposicaoController';
 
 const routes = express.Router();
 
@@ -15,6 +16,7 @@ const eventoController =  new EventoController();
 const produtoController = new ProdutoController();
 const gondolaController = new GondolaController();
 const assinaturaController = new AssinaturaController()
+const exposicaoController = new ExposicaoController()
 
 routes.post('/consumidor', consumidorController.create);
 routes.get('/consumidor/:email', consumidorController.getByEmail);
@@ -30,8 +32,9 @@ routes.delete('/produtor/:idUsuario', produtorController.delete)
 routes.post('/evento', eventoController.createEvento);
 routes.get('/evento/:idEvento', eventoController.getEvento)
 routes.get('/evento', eventoController.getEventosAtivos)
-routes.delete('/evento/:idEvento', eventoController.deleteEventoAndItsRelations)
 routes.get('/evento/:idEvento/get-subscribers', eventoController.getSubscribersAtivos)
+routes.get('/evento/:idEvento/get-gondolas', eventoController.getAllGondolas)
+routes.delete('/evento/:idEvento', eventoController.deleteEventoAndItsRelations)
 
 routes.post('/produto', produtoController.create)
 routes.get('/produto', produtoController.getAll)
@@ -41,13 +44,16 @@ routes.delete('/produto/:idProduto', produtoController.delete)
 routes.post('/gondola', gondolaController.createGondola)
 routes.get('/gondola', gondolaController.getGondolas)
 routes.get('/gondola/:idGondola', gondolaController.getGondola)
+routes.get('/gondola/:idGondola/get-eventos', gondolaController.getAllEventos)
 routes.delete('/gondola/:idGondola', gondolaController.deleteGondolaAndItsRelations)
 routes.delete('/gondola/:idGondola/item-gondola/:idItemGondola', gondolaController.deleteItemGondolaFromGondola)
 
 routes.post('/assinatura', assinaturaController.createAssinatura)
+routes.get('/assinatura/:idUsuario/?', assinaturaController.getAllByUsuario)
 routes.patch('/assinatura/:idAssinatura/desassinar', assinaturaController.desassinarEvento)
 routes.patch('/assinatura/:idAssinatura/reassinar', assinaturaController.reassinarEvento)
-routes.get('/assinatura/:idUsuario/?', assinaturaController.getAllByUsuario)
 
+routes.post('/exposicao', exposicaoController.createExposicao)
+routes.delete('/exposicao/:idExposicao', exposicaoController.deleteExposicao)
 
 export default routes;
