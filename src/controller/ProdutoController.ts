@@ -41,7 +41,7 @@ export class ProdutoController {
     
         const idUsuario = request.body.Criador.idUsuario
 
-        const criadorResult = await usuarioService.getById(idUsuario)
+        const criadorResult = await usuarioService.findOne(idUsuario)
         
         const produto : Produto = request.body
         
@@ -55,4 +55,4 @@ export class ProdutoController {
 
 }
 
-export default ProdutoController;
+export default new ProdutoController();

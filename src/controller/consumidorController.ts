@@ -57,4 +57,4 @@ class ConsumidorController {
     }
 }
 
-export default ConsumidorController;
+export default new ConsumidorController();

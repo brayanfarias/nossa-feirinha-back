@@ -2,10 +2,9 @@ import { getConnection } from "typeorm";
 import { Endereco } from "../entity/Endereco";
 import { Evento } from "../entity/Evento";
 import { Usuario } from "../entity/Usuario";
-import EnderecoService from "./EnderecoService";
 import moment = require('moment');
+import { EnderecoService } from "./EnderecoService";
 
-const enderecoService = new EnderecoService();
 
 export class EventoService {
 
@@ -44,7 +43,7 @@ export class EventoService {
 
    async deleteEnderecoRelation(evento: Evento) {
 
-      await enderecoService.delete(evento.endereco);
+      await EnderecoService.delete(evento.endereco);
 
    }
 

@@ -4,6 +4,7 @@ import { Evento } from "../entity/Evento";
 import { Usuario } from "../entity/Usuario";
 import AssinaturaService from "../services/AssinaturaService";
 import EventoService from "../services/EventoService";
+import UserRepository from "../services/UserRepository";
 import UsuarioService from "../services/UsuarioService";
 
 const assinaturaService = new AssinaturaService();
@@ -16,7 +17,7 @@ export class AssinaturaController {
 
         const idUsuario = request.params.idUsuario
 
-        const usuario: Usuario = await usuarioService.getById(idUsuario)
+        const usuario: Usuario = await usuarioService.findOne(idUsuario)
 
         let queryIsAtiva = request.query.isAtiva
         
@@ -63,13 +64,16 @@ export class AssinaturaController {
 
     async createAssinatura(request: Request, response: Response) {
 
+        const user = new Usuario();
+        
+
         const idEvento = request.body.Evento.idEvento
 
         const evento: Evento = await eventoService.getById(idEvento)
 
         const idUsuario = request.body.Usuario.idUsuario
 
-        const usuario: Usuario = await usuarioService.getById(idUsuario)
+        const usuario: Usuario = await usuarioService.findOne(idUsuario)
 
         const assinatura: Assinatura = await assinaturaService.createAssinatura(evento, usuario)
 
@@ -78,4 +82,4 @@ export class AssinaturaController {
 
 }
 
-export default AssinaturaController;
+export default new AssinaturaController();

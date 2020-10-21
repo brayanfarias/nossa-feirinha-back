@@ -1,7 +1,8 @@
-import { PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, Entity, TableInheritance } from 'typeorm'
+import { PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, OneToMany, Entity, TableInheritance, ManyToMany, JoinTable, CreateDateColumn } from 'typeorm'
 import { Endereco } from './Endereco';
 import { Evento } from './Evento';
 import { Produto } from './Produto';
+import Role from './Role';
 
 @Entity()
 @TableInheritance({ column: { type: 'varchar', name: 'tipo' } })
@@ -20,7 +21,7 @@ export class Usuario {
     email: string;
 
     @Column()
-    senha: string;
+    password: string;
 
     @OneToOne(type => Endereco, {
         cascade: true,
@@ -39,5 +40,16 @@ export class Usuario {
 
     @OneToMany(type => Evento, evento => evento.criador)
      eventos: Evento[]
+     
+    @CreateDateColumn()
+     created_at: Date;
+   
+    @ManyToMany(() => Role)
+    @JoinTable({
+       name: "users_roles",
+       joinColumns: [{ name: "user_id" }],
+       inverseJoinColumns: [{ name: "role_id" }],
+    })
+    roles: Role[]; 
 
 }

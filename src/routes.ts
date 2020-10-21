@@ -1,53 +1,65 @@
 
-import express = require('express');
+import { Router } from "express";
 import EventoController from "./controller/EventoController";
 import ConsumidorController from "./controller/ConsumidorController";
 import ProdutorController from "./controller/ProdutorController";
 import ProdutoController from './controller/ProdutoController';
 import GondolaController from './controller/GondolaController';
 import AssinaturaController from './controller/AssinaturaController';
+import SessionController from "./controller/SessionController";
+import PermissionController from "./controller/PermissionController";
+import RoleController from "./controller/RoleController";
 
-const routes = express.Router();
+const routes = Router();
 
-const consumidorController = new ConsumidorController();
-const produtorController = new ProdutorController();
-const eventoController =  new EventoController();
-const produtoController = new ProdutoController();
-const gondolaController = new GondolaController();
-const assinaturaController = new AssinaturaController()
+routes.post("/sessions", SessionController.create);
+routes.post("/permissions", PermissionController.create);
+routes.post("/roles", RoleController.create);
 
-routes.post('/consumidor', consumidorController.create);
-routes.get('/consumidor/:email', consumidorController.getByEmail);
-routes.patch('/consumidor', consumidorController.update)
-routes.delete('/consumidor/:idUsuario', consumidorController.delete)
+routes.post("/products", is(["ROLE_ADMIN"]), ProductController.create);
+routes.get(
+  "/products",
+  is(["ROLE_ADMIN", "ROLE_USER"]),
+  ProdutoController.index
+);
+routes.get(
+  "/products/:id",
+  is(["ROLE_ADMIN", "ROLE_USER"]),
+  ProdutoController.show
+);
 
-routes.post('/produtor', produtorController.create);
-routes.get('/produtor/:email', produtorController.getByEmail);
-routes.get('/produtor/:idUsuario/gondola', produtorController.getGondolasFromThisProdutor)
-routes.patch('/produtor', produtorController.update)
-routes.delete('/produtor/:idUsuario', produtorController.delete)
+routes.post('/consumidor', ConsumidorController.create);
+routes.get('/consumidor/:email', ConsumidorController.getByEmail);
+routes.patch('/consumidor', ConsumidorController.update)
+routes.delete('/consumidor/:idUsuario', ConsumidorController.delete)
 
-routes.post('/evento', eventoController.createEvento);
-routes.get('/evento/:idEvento', eventoController.getEvento)
-routes.get('/evento', eventoController.getEventosAtivos)
-routes.delete('/evento/:idEvento', eventoController.deleteEventoAndItsRelations)
-routes.get('/evento/:idEvento/get-subscribers', eventoController.getSubscribersAtivos)
+routes.post('/produtor', ProdutorController.create);
+routes.get('/produtor/:email', ProdutorController.getByEmail);
+routes.get('/produtor/:idUsuario/gondola', ProdutorController.getGondolasFromThisProdutor)
+routes.patch('/produtor', ProdutorController.update)
+routes.delete('/produtor/:idUsuario', ProdutorController.delete)
 
-routes.post('/produto', produtoController.create)
-routes.get('/produto', produtoController.getAll)
-routes.get('/produto/:idUsuario', produtoController.getByProdutor)
-routes.delete('/produto/:idProduto', produtoController.delete)
+routes.post('/evento', EventoController.createEvento);
+routes.get('/evento/:idEvento', EventoController.getEvento)
+routes.get('/evento', EventoController.getEventosAtivos)
+routes.delete('/evento/:idEvento', EventoController.deleteEventoAndItsRelations)
+routes.get('/evento/:idEvento/get-subscribers', EventoController.getSubscribersAtivos)
 
-routes.post('/gondola', gondolaController.createGondola)
-routes.get('/gondola', gondolaController.getGondolas)
-routes.get('/gondola/:idGondola', gondolaController.getGondola)
-routes.delete('/gondola/:idGondola', gondolaController.deleteGondolaAndItsRelations)
-routes.delete('/gondola/:idGondola/item-gondola/:idItemGondola', gondolaController.deleteItemGondolaFromGondola)
+routes.post('/produto', ProdutorController.create)
+//routes.get('/produto', ProdutorController.getAll)
+//routes.get('/produto/:idUsuario', ProdutorController.getByProdutor)
+routes.delete('/produto/:idProduto', ProdutorController.delete)
 
-routes.post('/assinatura', assinaturaController.createAssinatura)
-routes.patch('/assinatura/:idAssinatura/desassinar', assinaturaController.desassinarEvento)
-routes.patch('/assinatura/:idAssinatura/reassinar', assinaturaController.reassinarEvento)
-routes.get('/assinatura/:idUsuario/?', assinaturaController.getAllByUsuario)
+routes.post('/gondola', GondolaController.createGondola)
+routes.get('/gondola', GondolaController.getGondolas)
+routes.get('/gondola/:idGondola', GondolaController.getGondola)
+routes.delete('/gondola/:idGondola', GondolaController.deleteGondolaAndItsRelations)
+routes.delete('/gondola/:idGondola/item-gondola/:idItemGondola', GondolaController.deleteItemGondolaFromGondola)
+
+routes.post('/assinatura', AssinaturaController.createAssinatura)
+routes.patch('/assinatura/:idAssinatura/desassinar', AssinaturaController.desassinarEvento)
+routes.patch('/assinatura/:idAssinatura/reassinar', AssinaturaController.reassinarEvento)
+routes.get('/assinatura/:idUsuario/?', AssinaturaController.getAllByUsuario)
 
 
 export default routes;

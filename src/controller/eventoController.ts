@@ -67,7 +67,7 @@ class EventoController {
 
         const idUsuario: string = request.body.Criador.idUsuario;
 
-        const usuario: Usuario = await usuarioService.getById(idUsuario)
+        const usuario: Usuario = await usuarioService.findOne(idUsuario)
 
         let endereco: Endereco = request.body.endereco as Endereco
 
@@ -81,4 +81,4 @@ class EventoController {
     };
 }
 
-export default EventoController;
+export default new EventoController();

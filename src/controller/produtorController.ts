@@ -68,4 +68,4 @@ class ProdutorController {
 
 }
 
-export default ProdutorController;
+export default new ProdutorController();
