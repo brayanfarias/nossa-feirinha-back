@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
-import UserRepository from "../repositories/UserRepository";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
+import UsuarioService from "../services/UsuarioService";
 
 class SessionController {
   async create(request: Request, response: Response) {
-    const { username, password } = request.body;
+    const { email , password } = request.body;
 
-    const userRepository = getCustomRepository(UserRepository);
+    const userRepository = getCustomRepository(UsuarioService);
 
     const user = await userRepository.findOne(
-      { username },
+      { email },
       { relations: ["roles"] }
     );
 
@@ -29,8 +29,8 @@ class SessionController {
 
     const roles = user.roles.map((role) => role.name);
 
-    const token = sign({ roles }, "93eea6a2c12628b3a3b7618f6882c912", {
-      subject: user.id,
+    const token = sign({ roles }, "0b4aececb637fb1496a51ba063d723f5", {
+      subject: user.idUsuario,
       expiresIn: "1d",
     });
 

@@ -16,17 +16,17 @@ routes.post("/sessions", SessionController.create);
 routes.post("/permissions", PermissionController.create);
 routes.post("/roles", RoleController.create);
 
-routes.post("/products", is(["ROLE_ADMIN"]), ProductController.create);
-routes.get(
-  "/products",
-  is(["ROLE_ADMIN", "ROLE_USER"]),
-  ProdutoController.index
-);
-routes.get(
-  "/products/:id",
-  is(["ROLE_ADMIN", "ROLE_USER"]),
-  ProdutoController.show
-);
+// routes.post("/products", is(["ROLE_ADMIN"]), ProductController.create);
+// routes.get(
+//   "/products",
+//   is(["ROLE_ADMIN", "ROLE_USER"]),
+//   ProdutoController.index
+// );
+// routes.get(
+//   "/products/:id",
+//   is(["ROLE_ADMIN", "ROLE_USER"]),
+//   ProdutoController.show
+// );
 
 routes.post('/consumidor', ConsumidorController.create);
 routes.get('/consumidor/:email', ConsumidorController.getByEmail);
@@ -45,9 +45,9 @@ routes.get('/evento', EventoController.getEventosAtivos)
 routes.delete('/evento/:idEvento', EventoController.deleteEventoAndItsRelations)
 routes.get('/evento/:idEvento/get-subscribers', EventoController.getSubscribersAtivos)
 
-routes.post('/produto', ProdutorController.create)
-//routes.get('/produto', ProdutorController.getAll)
-//routes.get('/produto/:idUsuario', ProdutorController.getByProdutor)
+routes.post('/produto', ProdutoController.create)
+routes.get('/produto', ProdutoController.getAll)
+routes.get('/produto/:idUsuario', ProdutoController.getByProdutor)
 routes.delete('/produto/:idProduto', ProdutorController.delete)
 
 routes.post('/gondola', GondolaController.createGondola)

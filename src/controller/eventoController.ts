@@ -8,14 +8,17 @@ import { Endereco } from "../entity/Endereco";
 import EnderecoService from "../services/EnderecoService";
 import { Assinatura } from "../entity/Assinatura";
 import AssinaturaService from "../services/AssinaturaService";
+import { Repository } from "typeorm";
 
 const eventoService = new EventoService();
 const usuarioService = new UsuarioService();
 const enderecoService = new EnderecoService()
 const assinaturaService = new AssinaturaService()
 
-class EventoController {
+class EventoController extends Repository<Evento> {
     
+
+
     async getSubscribersAtivos(request: Request, response: Response) {
 
         const idEvento = request.params.idEvento

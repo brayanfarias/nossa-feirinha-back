@@ -1,10 +1,12 @@
 
 import { Produtor } from "../entity/Produtor";
-import { getConnection } from "typeorm";
+import { getConnection, getCustomRepository } from "typeorm";
 import { Request, Response } from "express";
 import ProdutorService from "../services/ProdutorService";
 import { Gondola } from "../entity/Gondola";
 import GondolaService from "../services/GondolaService";
+import RoleRepository from "../services/RoleRepository";
+import { hash } from "bcryptjs";
 
 const produtorService = new ProdutorService()
 const gondolaService = new GondolaService();
@@ -40,10 +42,20 @@ class ProdutorController {
     }
 
     async create(request: Request, response: Response) {
-
+        const produtorRepository = getCustomRepository(ProdutorService);
+        const roleRepository = getCustomRepository(RoleRepository);
         const produtor: Produtor = request.body as Produtor;
 
-        const produtorResult = await getConnection().getRepository(Produtor).save(produtor)
+        const existUser = await produtorRepository.findOne({"email": produtor.email});
+
+        if (existUser) {
+            return response.status(400).json({ message: "Produtor já cadastrado!" });
+        }
+        
+        produtor.password = await hash(produtor.password, 8);
+        const existingRole = await roleRepository.findByIds(produtor.roles);
+        produtor.roles = existingRole;
+        const produtorResult = await produtorRepository.save(produtor)
 
         return response.send(produtorResult).status(200);
     }

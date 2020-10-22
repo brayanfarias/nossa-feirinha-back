@@ -8,3 +8,5 @@ export class Produtor extends Usuario {
     cnpj: string;
     
 }
+
+export default Produtor;

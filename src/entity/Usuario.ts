@@ -12,7 +12,7 @@ export class Usuario {
     idUsuario: string;
 
     @Column()
-    nome: string;
+    name: string;
 
     @Column()
     telefone: string;
@@ -47,7 +47,7 @@ export class Usuario {
     @ManyToMany(() => Role)
     @JoinTable({
        name: "users_roles",
-       joinColumns: [{ name: "user_id" }],
+       joinColumns: [{ name: "idUsuario" }],
        inverseJoinColumns: [{ name: "role_id" }],
     })
     roles: Role[]; 

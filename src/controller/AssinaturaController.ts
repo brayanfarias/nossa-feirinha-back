@@ -4,7 +4,6 @@ import { Evento } from "../entity/Evento";
 import { Usuario } from "../entity/Usuario";
 import AssinaturaService from "../services/AssinaturaService";
 import EventoService from "../services/EventoService";
-import UserRepository from "../services/UserRepository";
 import UsuarioService from "../services/UsuarioService";
 
 const assinaturaService = new AssinaturaService();
