@@ -9,6 +9,8 @@ import AssinaturaController from './controller/AssinaturaController';
 import SessionController from "./controller/SessionController";
 import PermissionController from "./controller/PermissionController";
 import RoleController from "./controller/RoleController";
+import { is } from "./middleware/permissions";
+import AdministradorController from "./controller/AdministradorController";
 
 const routes = Router();
 
@@ -37,17 +39,19 @@ routes.post('/produtor', ProdutorController.create);
 routes.get('/produtor/:email', ProdutorController.getByEmail);
 routes.get('/produtor/:idUsuario/gondola', ProdutorController.getGondolasFromThisProdutor)
 routes.patch('/produtor', ProdutorController.update)
-routes.delete('/produtor/:idUsuario', ProdutorController.delete)
+routes.delete('/produtor/:idUsuario',is(["ROLE_ADMIN"]), ProdutorController.delete)
 
-routes.post('/evento', EventoController.createEvento);
-routes.get('/evento/:idEvento', EventoController.getEvento)
-routes.get('/evento', EventoController.getEventosAtivos)
-routes.delete('/evento/:idEvento', EventoController.deleteEventoAndItsRelations)
-routes.get('/evento/:idEvento/get-subscribers', EventoController.getSubscribersAtivos)
+routes.post('/admin',AdministradorController.create)
 
-routes.post('/produto', ProdutoController.create)
-routes.get('/produto', ProdutoController.getAll)
-routes.get('/produto/:idUsuario', ProdutoController.getByProdutor)
+routes.post('/evento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.createEvento);
+routes.get('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getEvento)
+routes.get('/evento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getEventosAtivos)
+routes.delete('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.deleteEventoAndItsRelations)
+routes.get('/evento/:idEvento/get-subscribers',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getSubscribersAtivos)
+
+routes.post('/produto', is(["ROLE_PRODUTOR"]), ProdutoController.create)
+routes.get('/produto',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getAll)
+routes.get('/produto/:idUsuario',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getByProdutor)
 routes.delete('/produto/:idProduto', ProdutorController.delete)
 
 routes.post('/gondola', GondolaController.createGondola)

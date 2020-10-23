@@ -41,6 +41,8 @@ class ProdutorController {
         throw new Error('Method not implemented.');
     }
 
+   
+
     async create(request: Request, response: Response) {
         const produtorRepository = getCustomRepository(ProdutorService);
         const roleRepository = getCustomRepository(RoleRepository);
@@ -56,7 +58,7 @@ class ProdutorController {
         const existingRole = await roleRepository.findByIds(produtor.roles);
         produtor.roles = existingRole;
         const produtorResult = await produtorRepository.save(produtor)
-
+        delete produtorResult.password;
         return response.send(produtorResult).status(200);
     }
 

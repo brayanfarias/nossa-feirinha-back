@@ -10,7 +10,7 @@ import Permission from "./Permission";
 
 @Entity("roles")
 class Role {
-
+  
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
