@@ -45,6 +45,7 @@ routes.post('/gondola', gondolaController.createGondola)
 routes.get('/gondola', gondolaController.getGondolas)
 routes.get('/gondola/:idGondola', gondolaController.getGondola)
 routes.get('/gondola/:idGondola/get-eventos', gondolaController.getAllEventos)
+routes.patch('/gondola', gondolaController.updateGondola)
 routes.delete('/gondola/:idGondola', gondolaController.deleteGondolaAndItsRelations)
 routes.delete('/gondola/:idGondola/item-gondola/:idItemGondola', gondolaController.deleteItemGondolaFromGondola)
 

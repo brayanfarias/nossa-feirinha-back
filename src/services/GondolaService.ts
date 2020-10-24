@@ -15,6 +15,12 @@ const produtoService = new ProdutoService();
 
 export class GondolaService {
 
+    async update(gondola: Gondola) {
+        
+        return await getConnection().getRepository(Gondola).save(gondola)
+
+    }
+
     async getByProdutor(produtor: Produtor): Promise<Gondola[]> {
 
         return await getConnection().getRepository(Gondola).find({where: {produtor: produtor}})
