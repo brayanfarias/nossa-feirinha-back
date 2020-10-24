@@ -30,6 +30,7 @@ routes.patch('/produtor', produtorController.update)
 routes.delete('/produtor/:idUsuario', produtorController.delete)
 
 routes.post('/evento', eventoController.createEvento);
+routes.get('/evento/search/?', eventoController.getEventosByProduto)
 routes.get('/evento/:idEvento', eventoController.getEvento)
 routes.get('/evento', eventoController.getEventosAtivos)
 routes.get('/evento/:idEvento/get-subscribers', eventoController.getSubscribersAtivos)

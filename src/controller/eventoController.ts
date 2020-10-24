@@ -1,24 +1,79 @@
 
-import { Evento } from "../entity/Evento";
 import { Request, Response } from "express";
-import EventoService from "../services/EventoService";
-import UsuarioService from "../services/UsuarioService";
-import { Usuario } from "../entity/Usuario";
-import { Endereco } from "../entity/Endereco";
-import EnderecoService from "../services/EnderecoService";
+import { getConnection } from "typeorm";
 import { Assinatura } from "../entity/Assinatura";
-import AssinaturaService from "../services/AssinaturaService";
+import { Endereco } from "../entity/Endereco";
+import { Evento } from "../entity/Evento";
 import { Exposicao } from "../entity/Exposicao";
-import ExposicaoService from "../services/ExposicaoService";
 import { Gondola } from "../entity/Gondola";
+import { ItemGondola } from "../entity/ItemGondola";
+import { Produto } from "../entity/Produto";
+import { Usuario } from "../entity/Usuario";
+import AssinaturaService from "../services/AssinaturaService";
+import EnderecoService from "../services/EnderecoService";
+import EventoService from "../services/EventoService";
+import ExposicaoService from "../services/ExposicaoService";
+import ProdutoService from "../services/ProdutoService";
+import UsuarioService from "../services/UsuarioService";
+import moment = require("moment");
 
 const eventoService = new EventoService();
 const usuarioService = new UsuarioService();
 const enderecoService = new EnderecoService()
 const assinaturaService = new AssinaturaService()
 const exposicaoService = new ExposicaoService()
+const produtoService = new ProdutoService()
 
 class EventoController {
+
+    async getEventosByProduto(request: Request, response: Response) {
+
+        const produto = request.query.product
+
+        const produtos: Produto[] = await produtoService.getByName(produto)
+
+        const itensGondola: ItemGondola[] = []
+
+        for (const produto of produtos) {
+
+            const result: ItemGondola[] = await getConnection().getRepository(ItemGondola).find({ where: { produto: produto } })
+
+            for (const itemGondola of result) {
+
+                itensGondola.push(itemGondola)
+
+            }
+        }
+
+        const exposicoes: Exposicao[] = []
+
+        for (const itemGondola of itensGondola) {
+
+           const result:Exposicao[] =  await getConnection().getRepository(Exposicao).find({where: {gondola : itemGondola.gondola}})
+
+           for (const exposicao of result) {
+
+               exposicoes.push(exposicao)
+               
+           }
+            
+        }
+
+
+        const horaAtual = moment().format();
+
+        const eventos = exposicoes.filter( exposicao => {
+            const horaEvento = moment(exposicao.evento.dataEvento).format();
+
+            if (horaEvento > horaAtual) {
+                return exposicao.evento;
+            }
+        })
+
+
+        return response.status(200).send(eventos)
+
+    }
 
     async getAllGondolas(request: Request, response: Response) {
 
