@@ -13,6 +13,16 @@ const exposicaoService = new ExposicaoService()
 
 export class GondolaController {
 
+    async updateGondola(request: Request, response:Response) {
+        
+        const gondola: Gondola = request.body as Gondola;
+
+        const result = await gondolaService.update(gondola)
+
+        return response.status(200).send(result)
+       
+    }
+
     async getAllEventos(request: Request, response: Response) {
 
         const idGondola = request.params.idGondola
