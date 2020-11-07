@@ -70,7 +70,7 @@ class EventoController extends Repository<Evento> {
 
         const idUsuario: string = request.body.Criador.idUsuario;
 
-        const usuario: Usuario = await usuarioService.findOne(idUsuario)
+        const usuario: Usuario = await usuarioService.getById(idUsuario)
 
         let endereco: Endereco = request.body.endereco as Endereco
 

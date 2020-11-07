@@ -16,7 +16,7 @@ export class AssinaturaController {
 
         const idUsuario = request.params.idUsuario
 
-        const usuario: Usuario = await usuarioService.findOne(idUsuario)
+        const usuario: Usuario = await usuarioService.getById(idUsuario)
 
         let queryIsAtiva = request.query.isAtiva
         
@@ -72,7 +72,7 @@ export class AssinaturaController {
 
         const idUsuario = request.body.Usuario.idUsuario
 
-        const usuario: Usuario = await usuarioService.findOne(idUsuario)
+        const usuario: Usuario = await usuarioService.getById(idUsuario)
 
         const assinatura: Assinatura = await assinaturaService.createAssinatura(evento, usuario)
 

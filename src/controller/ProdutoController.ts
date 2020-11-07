@@ -41,7 +41,7 @@ export class ProdutoController {
     
         const idUsuario = request.body.Criador.idUsuario
 
-        const criadorResult = await usuarioService.findOne(idUsuario)
+        const criadorResult = await usuarioService.getById(idUsuario)
         
         const produto : Produto = request.body
         

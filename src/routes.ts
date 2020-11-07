@@ -45,7 +45,7 @@ routes.post('/admin',AdministradorController.create)
 
 routes.post('/evento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.createEvento);
 routes.get('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getEvento)
-routes.get('/evento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getEventosAtivos)
+routes.get('/evento', EventoController.getEventosAtivos)
 routes.delete('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.deleteEventoAndItsRelations)
 routes.get('/evento/:idEvento/get-subscribers',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getSubscribersAtivos)
 
