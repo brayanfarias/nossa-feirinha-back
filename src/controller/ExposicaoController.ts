@@ -10,7 +10,7 @@ const gondolaService = new GondolaService()
 const eventoService = new EventoService()
 const exposicaoService = new ExposicaoService()
 
-export class ExposicaoController {
+class ExposicaoController {
 
     async deleteExposicao(request: Request, response: Response) {
         const idExposicao = request.params.idExposicao
@@ -41,4 +41,4 @@ export class ExposicaoController {
 
 }
 
-export default ExposicaoController
+export default new ExposicaoController();
