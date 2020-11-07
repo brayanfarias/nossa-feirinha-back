@@ -65,5 +65,7 @@ routes.patch('/assinatura/:idAssinatura/desassinar', AssinaturaController.desass
 routes.patch('/assinatura/:idAssinatura/reassinar', AssinaturaController.reassinarEvento)
 routes.get('/assinatura/:idUsuario/?', AssinaturaController.getAllByUsuario)
 
+routes.post('/exposicao', exposicaoController.createExposicao)
+routes.delete('/exposicao/:idExposicao', exposicaoController.deleteExposicao)
 
 export default routes;

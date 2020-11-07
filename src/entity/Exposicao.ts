@@ -1,19 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, JoinColumn, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, JoinColumn, ManyToOne } from "typeorm";
 import { Evento } from "./Evento";
 import { Gondola } from "./Gondola";
 
 @Entity()
-export class Exposicao{
+export class Exposicao {
 
     @PrimaryGeneratedColumn("uuid")
-    idExposicao:string;
+    idExposicao: string;
 
-    @OneToOne(type => Gondola)
+    @ManyToOne(type => Gondola, {
+        eager: true
+    })
     @JoinColumn()
-    gondola:Gondola;
+    gondola: Gondola;
 
-    @OneToOne(type => Evento)
+    @ManyToOne(type => Evento,{
+        eager: true
+    })
     @JoinColumn()
-    evento:Evento;
+    evento: Evento;
 
 }

@@ -14,8 +14,22 @@ const eventoService = new EventoService();
 const usuarioService = new UsuarioService();
 const enderecoService = new EnderecoService()
 const assinaturaService = new AssinaturaService()
+const exposicaoService = new ExposicaoService()
+
 
 class EventoController extends Repository<Evento> {
+
+    async getAllGondolas(request: Request, response: Response) {
+
+        const idEvento = request.params.idEvento
+
+        const exposicoes: Exposicao[] = await exposicaoService.getByIdEvento(idEvento)
+
+        const gondolas:Gondola[] = await exposicaoService.extrairRetornarRelation(exposicoes, exposicaoService.RELATION.GONDOLA)
+
+        return response.status(200).send(gondolas)
+
+    }
     
 
 

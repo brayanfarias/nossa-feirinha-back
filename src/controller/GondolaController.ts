@@ -1,13 +1,39 @@
 import { Request, Response } from "express";
+import { Evento } from "../entity/Evento";
+import { Exposicao } from "../entity/Exposicao";
 import { Gondola } from "../entity/Gondola";
 import { ItemGondola } from "../entity/ItemGondola";
+import ExposicaoService from "../services/ExposicaoService";
 import GondolaService from "../services/GondolaService";
 import ItemGondolaService from "../services/ItemGondolaService";
 
 const itemGondolaService = new ItemGondolaService()
 const gondolaService = new GondolaService();
+const exposicaoService = new ExposicaoService()
 
 export class GondolaController {
+
+    async updateGondola(request: Request, response:Response) {
+        
+        const gondola: Gondola = request.body as Gondola;
+
+        const result = await gondolaService.update(gondola)
+
+        return response.status(200).send(result)
+       
+    }
+
+    async getAllEventos(request: Request, response: Response) {
+
+        const idGondola = request.params.idGondola
+
+        const exposicoes: Exposicao[] = await exposicaoService.getByIdGondola(idGondola)
+
+        const eventos:Evento[] = await exposicaoService.extrairRetornarRelation(exposicoes,exposicaoService.RELATION.EVENTO)
+
+        return response.status(200).send(eventos)
+
+    }
 
     async deleteItemGondolaFromGondola(request: Request, response: Response) {
 
