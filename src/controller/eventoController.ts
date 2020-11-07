@@ -8,6 +8,9 @@ import { Endereco } from "../entity/Endereco";
 import EnderecoService from "../services/EnderecoService";
 import { Assinatura } from "../entity/Assinatura";
 import AssinaturaService from "../services/AssinaturaService";
+import ExposicaoService from "../services/ExposicaoService";
+import { Exposicao } from "../entity/Exposicao";
+import { Gondola } from "../entity/Gondola";
 import { Repository } from "typeorm";
 
 const eventoService = new EventoService();
