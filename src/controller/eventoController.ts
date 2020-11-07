@@ -8,9 +8,7 @@ import { Endereco } from "../entity/Endereco";
 import EnderecoService from "../services/EnderecoService";
 import { Assinatura } from "../entity/Assinatura";
 import AssinaturaService from "../services/AssinaturaService";
-import { Exposicao } from "../entity/Exposicao";
-import ExposicaoService from "../services/ExposicaoService";
-import { Gondola } from "../entity/Gondola";
+import { Repository } from "typeorm";
 
 const eventoService = new EventoService();
 const usuarioService = new UsuarioService();
@@ -18,7 +16,8 @@ const enderecoService = new EnderecoService()
 const assinaturaService = new AssinaturaService()
 const exposicaoService = new ExposicaoService()
 
-class EventoController {
+
+class EventoController extends Repository<Evento> {
 
     async getAllGondolas(request: Request, response: Response) {
 
@@ -32,6 +31,8 @@ class EventoController {
 
     }
     
+
+
     async getSubscribersAtivos(request: Request, response: Response) {
 
         const idEvento = request.params.idEvento
@@ -97,4 +98,4 @@ class EventoController {
     };
 }
 
-export default EventoController;
+export default new EventoController();

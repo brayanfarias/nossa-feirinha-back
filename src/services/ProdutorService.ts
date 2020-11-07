@@ -1,8 +1,8 @@
-import { getConnection } from "typeorm";
+import { EntityRepository, getConnection, Repository } from "typeorm";
 import { Produtor } from "../entity/Produtor";
 
-
-export class ProdutorService {
+@EntityRepository(Produtor)
+export class ProdutorService extends Repository<Produtor>{
 
     async getById(idUsuario: string): Promise<Produtor> {
 
