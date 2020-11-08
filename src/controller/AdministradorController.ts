@@ -2,9 +2,9 @@
 import { Consumidor } from "../entity/Consumidor";
 import { getConnection, getCustomRepository } from "typeorm";
 import { Request, Response } from "express";
-import RoleRepository from "../services/RoleRepository";
+import RoleRepository from "../repository/RoleRepository";
 import { hash } from "bcryptjs";
-import AdministradorRepository from "../services/AdministradorRepository";
+import AdministradorRepository from "../repository/AdministradorRepository";
 import Admin from "../entity/Admin";
 
 
