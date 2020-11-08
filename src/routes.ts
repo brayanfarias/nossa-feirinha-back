@@ -18,7 +18,6 @@ routes.post("/sessions", SessionController.create);
 routes.post("/permissions", PermissionController.create);
 routes.post("/roles", RoleController.create);
 
-
 routes.post('/consumidor', ConsumidorController.create);
 routes.get('/consumidor/:email', ConsumidorController.getByEmail);
 routes.patch('/consumidor', ConsumidorController.update)
@@ -60,5 +59,6 @@ routes.get('/assinatura/:idUsuario/?', AssinaturaController.getAllByUsuario)
 
 routes.post('/exposicao', ExposicaoController.createExposicao)
 routes.delete('/exposicao/:idExposicao', ExposicaoController.deleteExposicao)
+routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
 
 export default routes;

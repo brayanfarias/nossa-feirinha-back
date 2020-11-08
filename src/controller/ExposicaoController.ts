@@ -12,6 +12,16 @@ const exposicaoService = new ExposicaoService()
 
 class ExposicaoController {
 
+    async getByGondola(request: Request, response: Response) {
+        const idGondola = request.params.idGondola
+
+        const gondola: Gondola = await gondolaService.getById(idGondola)
+
+        const exposicao: Exposicao[] = await exposicaoService.getByIdGondola(gondola.idGondola)
+
+        return response.status(200).send(exposicao)
+    }
+
     async deleteExposicao(request: Request, response: Response) {
         const idExposicao = request.params.idExposicao
 
