@@ -3,6 +3,11 @@ import { Endereco } from "../entity/Endereco";
 
 export class EnderecoService {
 
+    async update(endereco: Endereco) :Promise<Endereco> {
+        
+        return await getConnection().getRepository(Endereco).save(endereco);
+    }
+
     async create(endereco: Endereco): Promise<Endereco> {
 
         return await getConnection().getRepository(Endereco).save(endereco);
