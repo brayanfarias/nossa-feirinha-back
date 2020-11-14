@@ -5,7 +5,7 @@ import { Request, Response } from "express";
 import ProdutorService from "../services/ProdutorService";
 import { Gondola } from "../entity/Gondola";
 import GondolaService from "../services/GondolaService";
-import RoleRepository from "../services/RoleRepository";
+import RoleRepository from "../repository/RoleRepository";
 import { hash } from "bcryptjs";
 
 const produtorService = new ProdutorService()

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
-import PermissionRepository from "../services/PermissionRepository";
+import PermissionRepository from "../repository/PermissionRepository";
 
 class PermissionController {
   async create(request: Request, response: Response) {

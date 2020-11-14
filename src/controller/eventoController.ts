@@ -1,17 +1,16 @@
-
-import { Evento } from "../entity/Evento";
 import { Request, Response } from "express";
-import EventoService from "../services/EventoService";
-import UsuarioService from "../services/UsuarioService";
-import { Usuario } from "../entity/Usuario";
-import { Endereco } from "../entity/Endereco";
-import EnderecoService from "../services/EnderecoService";
+import { Repository } from "typeorm";
 import { Assinatura } from "../entity/Assinatura";
-import AssinaturaService from "../services/AssinaturaService";
-import ExposicaoService from "../services/ExposicaoService";
+import { Endereco } from "../entity/Endereco";
+import { Evento } from "../entity/Evento";
 import { Exposicao } from "../entity/Exposicao";
 import { Gondola } from "../entity/Gondola";
-import { Repository } from "typeorm";
+import { Usuario } from "../entity/Usuario";
+import AssinaturaService from "../services/AssinaturaService";
+import EnderecoService from "../services/EnderecoService";
+import EventoService from "../services/EventoService";
+import ExposicaoService from "../services/ExposicaoService";
+import UsuarioService from "../services/UsuarioService";
 
 const eventoService = new EventoService();
 const usuarioService = new UsuarioService();
@@ -21,6 +20,16 @@ const exposicaoService = new ExposicaoService()
 
 
 class EventoController extends Repository<Evento> {
+
+   async updateEvento(request: Request, response: Response) {
+
+    const evento: Evento = request.body as Evento;
+
+    const result = await eventoService.update(evento)
+
+    return response.status(200).send(result)
+
+}
 
     async getAllGondolas(request: Request, response: Response) {
 

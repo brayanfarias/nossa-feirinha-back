@@ -1,24 +1,22 @@
-
 import { Router } from "express";
-import EventoController from "./controller/EventoController";
-import ConsumidorController from "./controller/ConsumidorController";
-import ProdutorController from "./controller/ProdutorController";
-import ProdutoController from './controller/ProdutoController';
-import GondolaController from './controller/GondolaController';
-import AssinaturaController from './controller/AssinaturaController';
-import SessionController from "./controller/SessionController";
-import PermissionController from "./controller/PermissionController";
-import RoleController from "./controller/RoleController";
-import { is } from "./middleware/permissions";
 import AdministradorController from "./controller/AdministradorController";
-import ExposicaoController from "./controller/ExposicaoController"
+import AssinaturaController from './controller/AssinaturaController';
+import ConsumidorController from "./controller/ConsumidorController";
+import EventoController from "./controller/EventoController";
+import ExposicaoController from "./controller/ExposicaoController";
+import GondolaController from './controller/GondolaController';
+import PermissionController from "./controller/PermissionController";
+import ProdutoController from './controller/ProdutoController';
+import ProdutorController from "./controller/ProdutorController";
+import RoleController from "./controller/RoleController";
+import SessionController from "./controller/SessionController";
+import { is } from "./middleware/permissions";
 
 const routes = Router();
 
 routes.post("/sessions", SessionController.create);
 routes.post("/permissions", PermissionController.create);
 routes.post("/roles", RoleController.create);
-
 
 routes.post('/consumidor', ConsumidorController.create);
 routes.get('/consumidor/:email', ConsumidorController.getByEmail);
@@ -34,7 +32,8 @@ routes.delete('/produtor/:idUsuario',is(["ROLE_ADMIN"]), ProdutorController.dele
 routes.post('/admin',AdministradorController.create)
 
 routes.post('/evento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.createEvento);
-routes.get('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getEvento)
+routes.patch('/evento', is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.updateEvento)
+routes.get('/evento/:idEvento', EventoController.getEvento)
 routes.get('/evento', EventoController.getEventosAtivos)
 routes.delete('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.deleteEventoAndItsRelations)
 routes.get('/evento/:idEvento/get-subscribers',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getSubscribersAtivos)
@@ -60,5 +59,6 @@ routes.get('/assinatura/:idUsuario/?', AssinaturaController.getAllByUsuario)
 
 routes.post('/exposicao', ExposicaoController.createExposicao)
 routes.delete('/exposicao/:idExposicao', ExposicaoController.deleteExposicao)
+routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
 
 export default routes;
