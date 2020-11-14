@@ -26,4 +26,4 @@ class EnderecoController {
 }
 
 
-export default EnderecoController;
+export default new EnderecoController();

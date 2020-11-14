@@ -1,6 +1,5 @@
-
 import { Request, Response } from "express";
-import { getConnection } from "typeorm";
+import { getConnection, Repository } from "typeorm";
 import { Assinatura } from "../entity/Assinatura";
 import { Endereco } from "../entity/Endereco";
 import { Evento } from "../entity/Evento";
@@ -17,6 +16,7 @@ import ProdutoService from "../services/ProdutoService";
 import UsuarioService from "../services/UsuarioService";
 import moment = require("moment");
 
+
 const eventoService = new EventoService();
 const usuarioService = new UsuarioService();
 const enderecoService = new EnderecoService()
@@ -24,7 +24,24 @@ const assinaturaService = new AssinaturaService()
 const exposicaoService = new ExposicaoService()
 const produtoService = new ProdutoService()
 
-class EventoController {
+
+class EventoController extends Repository<Evento> {
+
+    async updateEvento(request: Request, response: Response) {
+
+        const evento: Evento = request.body as Evento;
+       
+        const endereco:Endereco = request.body.endereco as Endereco
+
+        await enderecoService.update(endereco)
+
+        await eventoService.update(evento)
+
+        const result = await eventoService.getById(evento.idEvento)
+
+        return response.status(200).send(result)
+
+    }
 
     async getEventosByProduto(request: Request, response: Response) {
 
@@ -87,6 +104,8 @@ class EventoController {
 
     }
     
+
+
     async getSubscribersAtivos(request: Request, response: Response) {
 
         const idEvento = request.params.idEvento
@@ -152,4 +171,4 @@ class EventoController {
     };
 }
 
-export default EventoController;
+export default new EventoController();

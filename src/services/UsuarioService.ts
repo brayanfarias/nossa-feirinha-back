@@ -1,11 +1,12 @@
-import { getConnection } from "typeorm";
+import { EntityRepository, getConnection, Repository } from "typeorm";
 import { Assinatura } from "../entity/Assinatura";
 import { Usuario } from "../entity/Usuario";
 import AssinaturaService from "./AssinaturaService";
 
 const assinaturaService = new AssinaturaService()
 
-export class UsuarioService {
+@EntityRepository(Usuario)
+export class UsuarioService extends Repository<Usuario> {
 
     async extractUsersFromAssinatura(assinaturas:Assinatura[]): Promise<Usuario[]> {
 

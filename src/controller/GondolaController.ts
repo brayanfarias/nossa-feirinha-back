@@ -96,4 +96,4 @@ export class GondolaController {
     }
 }
 
-export default GondolaController;
+export default new GondolaController();

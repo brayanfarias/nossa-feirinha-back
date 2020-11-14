@@ -9,6 +9,12 @@ const enderecoService = new EnderecoService();
 
 export class EventoService {
 
+   async update(evento: Evento) {
+
+      return await getConnection().getRepository(Evento).save(evento)
+
+   }
+
    async getAllEventosAtivos(): Promise<Evento[]> {
 
       const eventos: Evento[] = await this.getAllEventos();

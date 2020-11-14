@@ -63,6 +63,9 @@ export class AssinaturaController {
 
     async createAssinatura(request: Request, response: Response) {
 
+        const user = new Usuario();
+        
+
         const idEvento = request.body.Evento.idEvento
 
         const evento: Evento = await eventoService.getById(idEvento)
@@ -78,4 +81,4 @@ export class AssinaturaController {
 
 }
 
-export default AssinaturaController;
+export default new AssinaturaController();

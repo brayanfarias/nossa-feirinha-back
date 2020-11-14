@@ -22,3 +22,5 @@ export class Produto {
     @Column()
     tipo: string;
 }
+
+export default Produto;
