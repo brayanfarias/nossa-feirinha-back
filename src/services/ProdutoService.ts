@@ -5,7 +5,7 @@ export class ProdutoService {
 
     async getByName(nome): Promise<Produto[]> {
 
-        return await getConnection().getRepository(Produto).find({ where: { nome: Like(`${nome}%`) } })
+        return await getConnection().getRepository(Produto).find({ where: { nome: Like(`%${nome}%`) } })
 
     }
 

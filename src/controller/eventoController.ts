@@ -15,6 +15,7 @@ import ExposicaoService from "../services/ExposicaoService";
 import ProdutoService from "../services/ProdutoService";
 import UsuarioService from "../services/UsuarioService";
 import moment = require("moment");
+import GondolaService from "../services/GondolaService";
 
 
 const eventoService = new EventoService();
@@ -23,6 +24,7 @@ const enderecoService = new EnderecoService()
 const assinaturaService = new AssinaturaService()
 const exposicaoService = new ExposicaoService()
 const produtoService = new ProdutoService()
+const gondolaService = new GondolaService()
 
 
 class EventoController extends Repository<Evento> {
@@ -46,49 +48,39 @@ class EventoController extends Repository<Evento> {
     async getEventosByProduto(request: Request, response: Response) {
 
         const produto = request.query.product
-
         const produtos: Produto[] = await produtoService.getByName(produto)
 
-        const itensGondola: ItemGondola[] = []
+        const eventosRetornar: Evento[] = []
+
+        if (!produtos) return response.status(200).send(eventosRetornar)
+
+        const eventos: Evento[] = await eventoService.getAllEventosAtivos();
+
+        if (!eventos) return response.status(200).send(eventosRetornar)
 
         for (const produto of produtos) {
 
-            const result: ItemGondola[] = await getConnection().getRepository(ItemGondola).find({ where: { produto: produto } })
+            for (const evento of eventos) {
 
-            for (const itemGondola of result) {
+                const exposicoes: Exposicao[] = await exposicaoService.getByIdEvento(evento.idEvento);
 
-                itensGondola.push(itemGondola)
+                for (const exposicao of exposicoes) {
+
+                    for (const itemGondola of exposicao.gondola.itensGondola) {
+
+                        if (itemGondola.produto.idProduto == produto.idProduto) {
+                            eventosRetornar.push(evento)
+                        }
+
+                    }
+
+                }
 
             }
+
         }
 
-        const exposicoes: Exposicao[] = []
-
-        for (const itemGondola of itensGondola) {
-
-           const result:Exposicao[] =  await getConnection().getRepository(Exposicao).find({where: {gondola : itemGondola.gondola}})
-
-           for (const exposicao of result) {
-
-               exposicoes.push(exposicao)
-               
-           }
-            
-        }
-
-
-        const horaAtual = moment().format();
-
-        const eventos = exposicoes.filter( exposicao => {
-            const horaEvento = moment(exposicao.evento.dataEvento).format();
-
-            if (horaEvento > horaAtual) {
-                return exposicao.evento;
-            }
-        })
-
-
-        return response.status(200).send(eventos)
+        return response.status(200).send(eventosRetornar)
 
     }
 
