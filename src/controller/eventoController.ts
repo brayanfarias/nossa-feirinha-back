@@ -21,15 +21,21 @@ const exposicaoService = new ExposicaoService()
 
 class EventoController extends Repository<Evento> {
 
-   async updateEvento(request: Request, response: Response) {
+    async updateEvento(request: Request, response: Response) {
 
-    const evento: Evento = request.body as Evento;
+        const evento: Evento = request.body as Evento;
+       
+        const endereco:Endereco = request.body.endereco as Endereco
 
-    const result = await eventoService.update(evento)
+        await enderecoService.update(endereco)
 
-    return response.status(200).send(result)
+        await eventoService.update(evento)
 
-}
+        const result = await eventoService.getById(evento.idEvento)
+
+        return response.status(200).send(result)
+
+    }
 
     async getAllGondolas(request: Request, response: Response) {
 
