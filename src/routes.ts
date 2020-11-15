@@ -25,8 +25,6 @@ routes.delete('/consumidor/:idUsuario', ConsumidorController.delete)
 
 routes.post('/produtor', ProdutorController.create);
 routes.get('/produtor/:email', ProdutorController.getByEmail);
-routes.get('/produtor/:idUsuario/gondola', ProdutorController.getGondolasFromThisProdutor)
-routes.patch('/produtor', ProdutorController.update)
 routes.delete('/produtor/:idUsuario',is(["ROLE_ADMIN"]), ProdutorController.delete)
 
 routes.post('/admin',AdministradorController.create)
@@ -46,6 +44,7 @@ routes.get('/evento/:idEvento/get-gondolas', EventoController.getAllGondolas)
 routes.delete('/produto/:idProduto', ProdutorController.delete)
 
 routes.post('/gondola', GondolaController.createGondola)
+routes.get('/gondola/:idUsuario/produtor', GondolaController.getGondolasByProdutor)
 routes.get('/gondola', GondolaController.getGondolas)
 routes.get('/gondola/:idGondola', GondolaController.getGondola)
 routes.get('/gondola/:idGondola/get-eventos', GondolaController.getAllEventos)

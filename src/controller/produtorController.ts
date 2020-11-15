@@ -1,29 +1,12 @@
 
-import { Produtor } from "../entity/Produtor";
-import { getConnection, getCustomRepository } from "typeorm";
-import { Request, Response } from "express";
-import ProdutorService from "../services/ProdutorService";
-import { Gondola } from "../entity/Gondola";
-import GondolaService from "../services/GondolaService";
-import RoleRepository from "../repository/RoleRepository";
 import { hash } from "bcryptjs";
-
-const produtorService = new ProdutorService()
-const gondolaService = new GondolaService();
+import { Request, Response } from "express";
+import { getConnection, getCustomRepository } from "typeorm";
+import { Produtor } from "../entity/Produtor";
+import RoleRepository from "../repository/RoleRepository";
+import ProdutorService from "../services/ProdutorService";
 
 class ProdutorController {
-
-    async getGondolasFromThisProdutor(request: Request, response: Response) {
-
-        const idUsuario = request.params.idUsuario
-
-        const produtor:Produtor = await produtorService.getById(idUsuario)
-
-        const gondolas:Gondola[] =  await gondolaService.getByProdutor(produtor)
-        
-        return response.status(200).send(gondolas)
-
-    }
 
     async delete(request: Request, response: Response) {
 
@@ -36,12 +19,6 @@ class ProdutorController {
         return response.send(resultDelete).status(200);
 
     }
-
-    update(arg0: string, update: any) {
-        throw new Error('Method not implemented.');
-    }
-
-   
 
     async create(request: Request, response: Response) {
         const produtorRepository = getCustomRepository(ProdutorService);
