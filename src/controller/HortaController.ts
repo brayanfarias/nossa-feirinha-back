@@ -10,6 +10,17 @@ const produtorService = new ProdutorService()
 
 class HortaController {
 
+    async deleteHorta(request: Request, response: Response) {
+
+        const idHorta = request.params.idHorta
+
+        const horta: Horta = await getCustomRepository(HortaRepository).findOne(idHorta)
+
+        const result = await getCustomRepository(HortaRepository).remove(horta)
+
+        return response.status(200).send(result)
+    }
+
     async updateHorta(request: Request, response: Response) {
 
         const horta: Horta = request.body

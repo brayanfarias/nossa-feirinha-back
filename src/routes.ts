@@ -68,5 +68,6 @@ routes.post('/horta', HortaController.create)
 routes.get('/horta/:idHorta', HortaController.getHorta)
 routes.patch('/horta', HortaController.updateHorta)
 routes.patch('/horta/:idHorta', HortaController.settingIsColhido)
+routes.delete('/horta/:idHorta', HortaController.deleteHorta)
 
 export default routes;
