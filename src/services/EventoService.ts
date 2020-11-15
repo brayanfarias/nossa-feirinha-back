@@ -30,14 +30,11 @@ export class EventoService {
                   if (itemGondola.produto.idProduto == produto.idProduto) {
                      result.push(evento)
                   }
-
                }
-
             }
-
          }
-
       }
+      
       return result;
    }
 
