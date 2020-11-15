@@ -63,5 +63,6 @@ routes.delete('/exposicao/:idExposicao', ExposicaoController.deleteExposicao)
 routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
 
 routes.post('/balcao', BalcaoController.createBalcao)
+routes.patch('/balcao/:idBalcao', BalcaoController.settingIsAtivo)
 
 export default routes;

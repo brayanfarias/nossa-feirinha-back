@@ -9,6 +9,20 @@ const produtorService = new ProdutorService()
 
 class BalcaoController {
 
+    async settingIsAtivo(request: Request, response: Response) {
+
+
+        const  balcaoRepository =  getCustomRepository(BalcaoRepository)
+        const idBalcao = request.params.idBalcao
+
+        const balcao:Balcao = await balcaoRepository.findOne(idBalcao);
+
+        const result: Balcao =  await balcaoRepository.changeIsAtivo(balcao)
+
+        return response.status(200).send(result);
+
+    }
+
     async createBalcao(request: Request, response: Response) {
 
         const idUsuario = request.body.Produtor.idUsuario
