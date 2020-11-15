@@ -13,7 +13,7 @@ const exposicaoService = new ExposicaoService()
 
 export class EventoService {
 
-   async retornarEventosQueContenhamEstesProdutos(produtos: Produto[], eventos: Evento[]): Promise<Evento[]> {
+   async filtrarEventosQueContenhamProdutos(produtos: Produto[], eventos: Evento[]): Promise<Evento[]> {
 
       const result: Evento[] = []
 

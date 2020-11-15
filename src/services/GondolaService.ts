@@ -15,10 +15,6 @@ const produtoService = new ProdutoService();
 
 export class GondolaService {
 
-    async getByIdGondola(idGondola: string): Promise<ItemGondola[]> {
-        throw new Error("Method not implemented.");
-    }
-
     async update(gondola: Gondola) {
         
         return await getConnection().getRepository(Gondola).save(gondola)

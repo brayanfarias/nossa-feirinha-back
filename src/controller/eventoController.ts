@@ -52,7 +52,7 @@ class EventoController extends Repository<Evento> {
 
         if (eventos.length == 0) return response.status(200).send()
 
-        const eventosRetornar: Evento[] = await eventoService.retornarEventosQueContenhamEstesProdutos(produtos, eventos)
+        const eventosRetornar: Evento[] = await eventoService.filtrarEventosQueContenhamProdutos(produtos, eventos)
 
         return response.status(200).send(eventosRetornar)
 

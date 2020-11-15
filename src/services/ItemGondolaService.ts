@@ -1,7 +1,6 @@
 import { getConnection } from "typeorm";
 import { Gondola } from "../entity/Gondola";
 import { ItemGondola } from "../entity/ItemGondola";
-import { Produto } from "../entity/Produto";
 
 export class ItemGondolaService {
 
