@@ -64,6 +64,7 @@ routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
 
 routes.post('/balcao', BalcaoController.createBalcao)
 routes.patch('/balcao/:idBalcao', BalcaoController.settingIsAtivo)
+routes.get('/balcao/:idBalcao', BalcaoController.getByIdBalcao)
 routes.get('/balcao/:idUsuario/produtor', BalcaoController.getByProdutor)
 
 export default routes;

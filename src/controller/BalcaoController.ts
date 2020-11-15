@@ -8,6 +8,15 @@ import ProdutorService from "../services/ProdutorService";
 const produtorService = new ProdutorService()
 
 class BalcaoController {
+
+    async getByIdBalcao(request: Request, response: Response) {
+
+        const idBalcao = request.params.idBalcao
+
+        const balcao: Balcao = await getCustomRepository(BalcaoRepository).findOne(idBalcao)
+
+        return response.status(200).send(balcao)
+    }
     
     async getByProdutor(request: Request, response: Response) {
 
