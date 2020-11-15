@@ -1,5 +1,5 @@
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Produtor } from "./Produtor";
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
 
 @Entity()
 export class Balcao {
@@ -8,7 +8,7 @@ export class Balcao {
     idBalcao: string;
 
     @Column()
-    isAtivo: boolean;
+    isAtivo: boolean =  true;
    
     @OneToOne(type => Produtor)
     @JoinColumn()

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import AdministradorController from "./controller/AdministradorController";
 import AssinaturaController from './controller/AssinaturaController';
+import BalcaoController from "./controller/BalcaoController";
 import ConsumidorController from "./controller/ConsumidorController";
 import EventoController from "./controller/EventoController";
 import ExposicaoController from "./controller/ExposicaoController";
@@ -30,16 +31,16 @@ routes.delete('/produtor/:idUsuario',is(["ROLE_ADMIN"]), ProdutorController.dele
 routes.post('/admin',AdministradorController.create)
 
 routes.get('/evento/search/?', EventoController.getEventosByProduto)
-routes.post('/evento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.createEvento);
-routes.patch('/evento', is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.updateEvento)
+routes.post('/evento', EventoController.createEvento);
+routes.patch('/evento', EventoController.updateEvento)
 routes.get('/evento/:idEvento', EventoController.getEvento)
 routes.get('/evento', EventoController.getEventosAtivos)
-routes.delete('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.deleteEventoAndItsRelations)
-routes.get('/evento/:idEvento/get-subscribers',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getSubscribersAtivos)
+routes.delete('/evento/:idEvento', EventoController.deleteEventoAndItsRelations)
+routes.get('/evento/:idEvento/get-subscribers', EventoController.getSubscribersAtivos)
 
-routes.post('/produto', is(["ROLE_PRODUTOR"]), ProdutoController.create)
-routes.get('/produto',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getAll)
-routes.get('/produto/:idUsuario',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getByProdutor)
+routes.post('/produto',  ProdutoController.create)
+routes.get('/produto', ProdutoController.getAll)
+routes.get('/produto/:idUsuario', ProdutoController.getByProdutor)
 routes.get('/evento/:idEvento/get-gondolas', EventoController.getAllGondolas)
 routes.delete('/produto/:idProduto', ProdutorController.delete)
 
@@ -60,5 +61,7 @@ routes.get('/assinatura/:idUsuario/?', AssinaturaController.getAllByUsuario)
 routes.post('/exposicao', ExposicaoController.createExposicao)
 routes.delete('/exposicao/:idExposicao', ExposicaoController.deleteExposicao)
 routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
+
+routes.post('/balcao', BalcaoController.createBalcao)
 
 export default routes;
