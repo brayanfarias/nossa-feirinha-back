@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Produto } from "./Produto";
 import { Produtor } from "./Produtor";
 
@@ -8,7 +8,7 @@ export class Horta {
     @PrimaryGeneratedColumn('uuid')
     idHorta: string;
 
-    @OneToOne(type => Produtor)
+    @ManyToOne(type => Produtor)
     @JoinTable()
     produtor: Produtor;
 
@@ -20,12 +20,12 @@ export class Horta {
 
     @ManyToMany(type => Produto)
     @JoinTable()
-    produtos: Array<Produto>;
+    produtos: Produto[];
 
     @Column()
     imagem: string;
 
     @Column()
-    isColhido: boolean
+    isColhido: boolean = false;
 
 }

@@ -1,0 +1,20 @@
+{
+  "dataPlantio": "xxxxxxxxxx",
+  "dataPrevisaoColheita": "xxxxxxxxxx",
+  "imagem": "zzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+  "Produtor": {
+    "idUsuario": "70e9cf7d-73fa-4f4d-8fe4-6f81a0a05a6e"
+  },
+  "produtos": [
+    {
+      "produto": {
+        "idProduto": "eb7d4d65-8652-4d3f-9a62-81efbd959653"
+      }
+    },
+    {
+      "produto": {
+        "idProduto": "730df914-040b-4f62-b522-b00a965cfc73"
+      }
+    }
+  ]
+}
