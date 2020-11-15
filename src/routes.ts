@@ -66,5 +66,6 @@ routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
 routes.patch('/horta/:idHorta/is-colhido', HortaController.settingIsColhido)
 routes.get('/horta/:idUsuario/produtor', HortaController.getByProdutor)
 routes.post('/horta', HortaController.create)
+routes.get('/horta/:idHorta', HortaController.getHorta)
 
 export default routes;

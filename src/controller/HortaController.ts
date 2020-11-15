@@ -10,6 +10,16 @@ const produtorService = new ProdutorService()
 
 class HortaController {
 
+    async getHorta(request: Request, response: Response) {
+
+        const idHorta = request.params.idHorta
+
+        const horta: Horta = await getCustomRepository(HortaRepository).findOne(idHorta, { relations: ["produtos"] })
+
+        return response.status(200).send(horta);
+
+    }
+
     async settingIsColhido(request: Request, response: Response) {
 
         const idHorta = request.params.idHorta
