@@ -6,9 +6,20 @@ import Produtor from "../entity/Produtor";
 import HortaRepository from "../repository/HortaRepository";
 import ProdutorService from "../services/ProdutorService";
 
-const produtorService= new ProdutorService()
+const produtorService = new ProdutorService()
 
 class HortaController {
+
+    async settingIsColhido(request: Request, response: Response) {
+
+        const idHorta = request.params.idHorta
+       
+        const horta:Horta =  await getCustomRepository(HortaRepository).findOne(idHorta)
+
+        const result:Horta = await getCustomRepository(HortaRepository).changeIsColhido(horta)
+
+        return response.status(200).send(result)
+    }
 
     async getByProdutor(request: Request, response: Response) {
 

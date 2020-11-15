@@ -9,6 +9,18 @@ const produtoService = new ProdutoService()
 @EntityRepository(Horta)
 class HortaRepository extends Repository<Horta> {
 
+    async changeIsColhido(horta: Horta): Promise<Horta> {
+
+        if (horta.isColhido) {
+            horta.isColhido = false;
+        } else {
+            horta.isColhido = true;
+        }
+
+        return await this.save(horta)
+
+    }
+
     async montarObjetoHortaSalvar(body: any, produtor: Produtor, produtos: any) {
 
         const horta = new Horta();
