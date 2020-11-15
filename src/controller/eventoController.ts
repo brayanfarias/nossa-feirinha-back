@@ -5,19 +5,22 @@ import { Endereco } from "../entity/Endereco";
 import { Evento } from "../entity/Evento";
 import { Exposicao } from "../entity/Exposicao";
 import { Gondola } from "../entity/Gondola";
+import { Produto } from "../entity/Produto";
 import { Usuario } from "../entity/Usuario";
 import AssinaturaService from "../services/AssinaturaService";
 import EnderecoService from "../services/EnderecoService";
 import EventoService from "../services/EventoService";
 import ExposicaoService from "../services/ExposicaoService";
+import ProdutoService from "../services/ProdutoService";
 import UsuarioService from "../services/UsuarioService";
+
 
 const eventoService = new EventoService();
 const usuarioService = new UsuarioService();
 const enderecoService = new EnderecoService()
 const assinaturaService = new AssinaturaService()
 const exposicaoService = new ExposicaoService()
-
+const produtoService = new ProdutoService()
 
 class EventoController extends Repository<Evento> {
 
@@ -34,6 +37,24 @@ class EventoController extends Repository<Evento> {
         const result = await eventoService.getById(evento.idEvento)
 
         return response.status(200).send(result)
+
+    }
+
+    async getEventosByProduto(request: Request, response: Response) {
+
+        const produto = request.query.product
+
+        const produtos: Produto[] = await produtoService.getByName(produto)
+
+        if (produtos.length == 0) return response.status(200).send()
+
+        const eventos: Evento[] = await eventoService.getAllEventosAtivos();
+
+        if (eventos.length == 0) return response.status(200).send()
+
+        const eventosRetornar: Evento[] = await eventoService.filtrarEventosQueContenhamProdutos(produtos, eventos)
+
+        return response.status(200).send(eventosRetornar)
 
     }
 

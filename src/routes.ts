@@ -31,6 +31,7 @@ routes.delete('/produtor/:idUsuario',is(["ROLE_ADMIN"]), ProdutorController.dele
 
 routes.post('/admin',AdministradorController.create)
 
+routes.get('/evento/search/?', EventoController.getEventosByProduto)
 routes.post('/evento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.createEvento);
 routes.patch('/evento', is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.updateEvento)
 routes.get('/evento/:idEvento', EventoController.getEvento)

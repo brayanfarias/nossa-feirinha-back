@@ -1,13 +1,42 @@
 import { getConnection } from "typeorm";
 import { Endereco } from "../entity/Endereco";
 import { Evento } from "../entity/Evento";
+import { Exposicao } from "../entity/Exposicao";
+import Produto from "../entity/Produto";
 import { Usuario } from "../entity/Usuario";
 import EnderecoService from "./EnderecoService";
+import ExposicaoService from "./ExposicaoService";
 import moment = require('moment');
 
 const enderecoService = new EnderecoService();
+const exposicaoService = new ExposicaoService()
 
 export class EventoService {
+
+   async filtrarEventosQueContenhamProdutos(produtos: Produto[], eventos: Evento[]): Promise<Evento[]> {
+
+      const result: Evento[] = []
+
+      for (const produto of produtos) {
+
+         for (const evento of eventos) {
+
+            const exposicoes: Exposicao[] = await exposicaoService.getByIdEvento(evento.idEvento);
+
+            for (const exposicao of exposicoes) {
+
+               for (const itemGondola of exposicao.gondola.itensGondola) {
+
+                  if (itemGondola.produto.idProduto == produto.idProduto) {
+                     result.push(evento)
+                  }
+               }
+            }
+         }
+      }
+      
+      return result;
+   }
 
    async update(evento: Evento) {
 
