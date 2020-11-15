@@ -64,5 +64,6 @@ routes.delete('/exposicao/:idExposicao', ExposicaoController.deleteExposicao)
 routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
 
 routes.post('/horta', HortaController.create)
+routes.get('/horta/:idUsuario', HortaController.getByProdutor)
 
 export default routes;
