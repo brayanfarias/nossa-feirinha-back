@@ -33,6 +33,8 @@ class HortaRepository extends Repository<Horta> {
 
         horta.produtor = produtor;
 
+        horta.descricao = body.descricao;
+
         horta.produtos = []
 
         for (const index of produtos) {

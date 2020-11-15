@@ -28,4 +28,7 @@ export class Horta {
     @Column()
     isColhido: boolean = false;
 
+    @Column()
+    descricao: string;
+
 }

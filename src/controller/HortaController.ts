@@ -10,6 +10,15 @@ const produtorService = new ProdutorService()
 
 class HortaController {
 
+    async updateHorta(request: Request, response: Response) {
+
+        const horta: Horta = request.body
+
+        const result: Horta = await getCustomRepository(HortaRepository).save(horta)
+
+        return response.status(200).send(result)
+    }
+
     async getHorta(request: Request, response: Response) {
 
         const idHorta = request.params.idHorta
