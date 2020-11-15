@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
-import { getConnection, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { Assinatura } from "../entity/Assinatura";
 import { Endereco } from "../entity/Endereco";
 import { Evento } from "../entity/Evento";
 import { Exposicao } from "../entity/Exposicao";
 import { Gondola } from "../entity/Gondola";
-import { ItemGondola } from "../entity/ItemGondola";
 import { Produto } from "../entity/Produto";
 import { Usuario } from "../entity/Usuario";
 import AssinaturaService from "../services/AssinaturaService";
@@ -14,8 +13,6 @@ import EventoService from "../services/EventoService";
 import ExposicaoService from "../services/ExposicaoService";
 import ProdutoService from "../services/ProdutoService";
 import UsuarioService from "../services/UsuarioService";
-import moment = require("moment");
-import GondolaService from "../services/GondolaService";
 
 
 const eventoService = new EventoService();
@@ -24,8 +21,6 @@ const enderecoService = new EnderecoService()
 const assinaturaService = new AssinaturaService()
 const exposicaoService = new ExposicaoService()
 const produtoService = new ProdutoService()
-const gondolaService = new GondolaService()
-
 
 class EventoController extends Repository<Evento> {
 
@@ -48,37 +43,16 @@ class EventoController extends Repository<Evento> {
     async getEventosByProduto(request: Request, response: Response) {
 
         const produto = request.query.product
+
         const produtos: Produto[] = await produtoService.getByName(produto)
 
-        const eventosRetornar: Evento[] = []
-
-        if (!produtos) return response.status(200).send(eventosRetornar)
+        if (produtos.length == 0) return response.status(200).send()
 
         const eventos: Evento[] = await eventoService.getAllEventosAtivos();
 
-        if (!eventos) return response.status(200).send(eventosRetornar)
+        if (eventos.length == 0) return response.status(200).send()
 
-        for (const produto of produtos) {
-
-            for (const evento of eventos) {
-
-                const exposicoes: Exposicao[] = await exposicaoService.getByIdEvento(evento.idEvento);
-
-                for (const exposicao of exposicoes) {
-
-                    for (const itemGondola of exposicao.gondola.itensGondola) {
-
-                        if (itemGondola.produto.idProduto == produto.idProduto) {
-                            eventosRetornar.push(evento)
-                        }
-
-                    }
-
-                }
-
-            }
-
-        }
+        const eventosRetornar: Evento[] = await eventoService.retornarEventosQueContenhamEstesProdutos(produtos, eventos)
 
         return response.status(200).send(eventosRetornar)
 
