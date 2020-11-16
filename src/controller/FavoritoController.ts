@@ -8,6 +8,17 @@ import UsuarioRepository from "../repository/UsuarioRepository";
 
 class FavoritoController {
 
+    async getByIdConsumidor(request: Request, response: Response) {
+
+        const idUsuario = request.params.idUsuario
+
+        const consumidor: Consumidor = await getCustomRepository(UsuarioRepository).findOne(idUsuario) as Consumidor
+
+        const favorito: Favorito = await getCustomRepository(FavoritoRespository).findOne({ where: { consumidor: consumidor }, relations: ["produtos"] })
+
+        return response.status(200).send(favorito)
+    }
+
     async getByIdFavorito(request: Request, response: Response) {
 
         const idFavorito = request.params.idFavorito
