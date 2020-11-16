@@ -4,6 +4,7 @@ import AssinaturaController from './controller/AssinaturaController';
 import ConsumidorController from "./controller/ConsumidorController";
 import EventoController from "./controller/EventoController";
 import ExposicaoController from "./controller/ExposicaoController";
+import FavoritoController from "./controller/FavoritoController";
 import GondolaController from './controller/GondolaController';
 import HortaController from "./controller/HortaController";
 import PermissionController from "./controller/PermissionController";
@@ -72,6 +73,8 @@ routes.patch('/horta/:idHorta', HortaController.settingIsColhido)
 routes.delete('/horta/:idHorta', HortaController.deleteHorta)
 
 routes.get('/usuario/:idUsuario', UsuarioController.getById)
+
+routes.post('/favorito', FavoritoController.createFavorito)
 
 
 export default routes;

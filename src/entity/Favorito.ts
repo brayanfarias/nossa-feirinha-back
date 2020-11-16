@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Consumidor } from "./Consumidor";
 import { Produto } from "./Produto";
 
@@ -9,16 +9,18 @@ export class Favorito {
     idFavorito: string;
 
     @OneToOne(type => Consumidor)
-    @JoinTable()
+    @JoinColumn()
     consumidor: Consumidor;
 
-    @Column()
+    @Column({
+        nullable: true,
+    })
     dataInativo: string;
 
     @Column()
-    isAtivo: boolean;
+    isAtivo: boolean = true;
 
-    @ManyToMany(type => Produto)
+    @ManyToMany(() => Produto)
     @JoinTable()
-    produtos: Array<Produto>
+    produtos: Produto[];
 }
