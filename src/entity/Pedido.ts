@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Balcao } from "./Balcao";
 import { Consumidor } from "./Consumidor";
 import { Entrega } from "./Entrega";
@@ -26,9 +26,10 @@ export class Pedido {
     @JoinTable()
     entrega: Entrega;
 
-    @ManyToMany(type => ItemPedido)
-    @JoinTable()
-    itensPedido: Array<ItemPedido>;
+    @OneToMany(type => ItemPedido, itemPedido => itemPedido.pedido, {
+        cascade: true,
+    })
+    itensPedido: ItemPedido[];
 
     @OneToOne(type => Consumidor)
     @JoinTable()

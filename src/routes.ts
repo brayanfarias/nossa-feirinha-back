@@ -7,6 +7,7 @@ import EventoController from "./controller/EventoController";
 import ExposicaoController from "./controller/ExposicaoController";
 import FormaController from "./controller/FormaController";
 import GondolaController from './controller/GondolaController';
+import PedidoController from "./controller/PedidoController";
 import PermissionController from "./controller/PermissionController";
 import ProdutoController from './controller/ProdutoController';
 import ProdutorController from "./controller/ProdutorController";
@@ -71,5 +72,7 @@ routes.get('/balcao/:idUsuario/produtor', BalcaoController.getByProdutor)
 routes.post('/forma?', FormaController.createForma)
 routes.patch('/forma/:idForma', FormaController.settingIsAtivo)
 routes.get('/forma/:idUsuario', FormaController.getFormasByProdutor)
+    
+routes.post('/pedido', PedidoController.createPedido)
 
 export default routes;
