@@ -6,8 +6,17 @@ import Produto from "../entity/Produto";
 import FavoritoRespository from "../repository/FavoritoRepository";
 import UsuarioRepository from "../repository/UsuarioRepository";
 
-
 class FavoritoController {
+
+    async getByIdFavorito(request: Request, response: Response) {
+
+        const idFavorito = request.params.idFavorito
+
+        const favorito: Favorito = await getCustomRepository(FavoritoRespository).findOne(idFavorito, {relations: ["consumidor", "produtos"]})
+
+        return response.status(200).send(favorito)
+
+    }
 
     async createFavorito(request: Request, response: Response) {
 
