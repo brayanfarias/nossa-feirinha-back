@@ -7,12 +7,14 @@ import EventoController from "./controller/EventoController";
 import ExposicaoController from "./controller/ExposicaoController";
 import FormaController from "./controller/FormaController";
 import GondolaController from './controller/GondolaController';
+import HortaController from "./controller/HortaController";
 import PedidoController from "./controller/PedidoController";
 import PermissionController from "./controller/PermissionController";
 import ProdutoController from './controller/ProdutoController';
 import ProdutorController from "./controller/ProdutorController";
 import RoleController from "./controller/RoleController";
 import SessionController from "./controller/SessionController";
+import UsuarioController from "./controller/UsuarioController";
 import { is } from "./middleware/permissions";
 
 const routes = Router();
@@ -75,5 +77,15 @@ routes.get('/forma/:idUsuario', FormaController.getFormasByProdutor)
     
 routes.post('/pedido', PedidoController.createPedido)
 routes.get('/pedido/:idPedido', PedidoController.getByIdPedido)
+
+routes.get('/horta/:idUsuario/produtor', HortaController.getByProdutor)
+routes.post('/horta', HortaController.create)
+routes.get('/horta/:idHorta', HortaController.getHorta)
+routes.patch('/horta', HortaController.updateHorta)
+routes.patch('/horta/:idHorta', HortaController.settingIsColhido)
+routes.delete('/horta/:idHorta', HortaController.deleteHorta)
+
+routes.get('/usuario/:idUsuario', UsuarioController.getById)
+
 
 export default routes;
