@@ -73,10 +73,7 @@ routes.get('/balcao/:idUsuario/produtor', BalcaoController.getByProdutor)
 
 routes.post('/forma?', FormaController.createForma)
 routes.patch('/forma/:idForma', FormaController.settingIsAtivo)
-routes.get('/forma/:idUsuario', FormaController.getFormasByProdutor)
-    
-routes.post('/pedido', PedidoController.createPedido)
-routes.get('/pedido/:idPedido', PedidoController.getByIdPedido)
+routes.get('/forma/:idUsuario', FormaController.getFormasByProdutor) 
 
 routes.get('/horta/:idUsuario/produtor', HortaController.getByProdutor)
 routes.post('/horta', HortaController.create)
@@ -87,5 +84,8 @@ routes.delete('/horta/:idHorta', HortaController.deleteHorta)
 
 routes.get('/usuario/:idUsuario', UsuarioController.getById)
 
+routes.get('/pedido/:idUsuario/usuario', PedidoController.getByIdUsuario)
+routes.post('/pedido', PedidoController.createPedido)
+routes.get('/pedido/:idPedido', PedidoController.getByIdPedido)
 
 export default routes;
