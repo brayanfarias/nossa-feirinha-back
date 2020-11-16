@@ -16,6 +16,15 @@ const consumidorService = new ConsumidorService()
 
 class PedidoController {
 
+    async updatePedido(request: Request, response: Response) {
+
+        const pedido: Pedido = request.body as Pedido;
+
+        const result: Pedido = await getCustomRepository(PedidoRepository).save(pedido);
+
+        return response.status(200).send(result)
+    }
+
     async deletePedido(request: Request, response: Response) {
 
         const idPedido = request.params.idPedido
