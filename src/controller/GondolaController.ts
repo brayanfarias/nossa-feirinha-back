@@ -3,15 +3,30 @@ import { Evento } from "../entity/Evento";
 import { Exposicao } from "../entity/Exposicao";
 import { Gondola } from "../entity/Gondola";
 import { ItemGondola } from "../entity/ItemGondola";
+import Produtor from "../entity/Produtor";
 import ExposicaoService from "../services/ExposicaoService";
 import GondolaService from "../services/GondolaService";
 import ItemGondolaService from "../services/ItemGondolaService";
+import ProdutorService from "../services/ProdutorService";
 
 const itemGondolaService = new ItemGondolaService()
 const gondolaService = new GondolaService();
 const exposicaoService = new ExposicaoService()
+const produtorService = new ProdutorService()
 
 export class GondolaController {
+
+    async getGondolasByProdutor(request: Request, response: Response) {
+
+        const idUsuario = request.params.idUsuario
+
+        const produtor:Produtor = await produtorService.getById(idUsuario)
+
+        const gondolas:Gondola[] =  await gondolaService.getByProdutor(produtor)
+        
+        return response.status(200).send(gondolas)
+
+    }
 
     async updateGondola(request: Request, response:Response) {
         
