@@ -74,6 +74,7 @@ routes.patch('/horta/:idHorta', HortaController.settingIsColhido)
 routes.delete('/horta/:idHorta', HortaController.deleteHorta)
 
 routes.get('/usuario/:idUsuario', UsuarioController.getById)
+routes.patch('/usuario', UsuarioController.updateUsuario)
 
 routes.post('/favorito', FavoritoController.createFavorito)
 routes.get('/favorito/:idUsuario/consumidor', FavoritoController.getByIdConsumidor)
