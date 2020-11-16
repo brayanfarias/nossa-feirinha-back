@@ -1,7 +1,7 @@
-import { Entity } from "typeorm";
+import { ChildEntity, Entity } from "typeorm";
 import { Forma } from "./Forma";
 
-@Entity()
+@ChildEntity()
 export class Entrega extends Forma {
 
 
