@@ -1,14 +1,28 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
 import { Forma } from "../entity/Forma";
+import Produtor from "../entity/Produtor";
 import { Usuario } from "../entity/Usuario";
 import FormaRepository from "../repository/FormaRepository";
+import ProdutorService from "../services/ProdutorService";
 import UsuarioService from "../services/UsuarioService";
 
 const usuarioService = new UsuarioService()
 const formaRepository = new FormaRepository()
+const produtorService = new ProdutorService()
 
 class FormaController  {
+
+    async getFormasByProdutor(request: Request, response: Response) {
+
+        const idUsuario = request.params.idUsuario
+
+        const produtor: Produtor = await produtorService.getById(idUsuario)
+
+        const formas: Forma[] = await getCustomRepository(FormaRepository).find({ where: { criador: produtor } })
+
+        return response.status(200).send(formas)
+    }
 
     async settingIsAtivo(request: Request, response: Response) {
 
