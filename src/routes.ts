@@ -41,6 +41,7 @@ routes.delete('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), Event
 routes.get('/evento/:idEvento/get-subscribers',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getSubscribersAtivos)
 
 routes.post('/produto',  ProdutoController.create)
+routes.get('/produto/search?', ProdutoController.getByStringLike)
 routes.get('/produto',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getAll)
 routes.get('/produto/:idUsuario',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getByProdutor)
 routes.get('/evento/:idEvento/get-gondolas', EventoController.getAllGondolas)
