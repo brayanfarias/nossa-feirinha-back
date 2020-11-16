@@ -10,6 +10,7 @@ import ProdutoController from './controller/ProdutoController';
 import ProdutorController from "./controller/ProdutorController";
 import RoleController from "./controller/RoleController";
 import SessionController from "./controller/SessionController";
+import UsuarioController from "./controller/UsuarioController";
 import { is } from "./middleware/permissions";
 
 const routes = Router();
@@ -60,5 +61,7 @@ routes.get('/assinatura/:idUsuario/?', AssinaturaController.getAllByUsuario)
 routes.post('/exposicao', ExposicaoController.createExposicao)
 routes.delete('/exposicao/:idExposicao', ExposicaoController.deleteExposicao)
 routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
+
+routes.get('/usuario/:idUsuario', UsuarioController.getById)
 
 export default routes;
