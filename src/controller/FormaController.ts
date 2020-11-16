@@ -8,7 +8,20 @@ import UsuarioService from "../services/UsuarioService";
 const usuarioService = new UsuarioService()
 const formaRepository = new FormaRepository()
 
-class FormaController  {   
+class FormaController  {
+
+    async settingIsAtivo(request: Request, response: Response) {
+
+        const formaRepository = getCustomRepository(FormaRepository)
+
+        const idForma = request.params.idForma
+
+        const forma: Forma = await formaRepository.findOne(idForma);
+
+        const result: Forma = await formaRepository.changeIsAtivo(forma)
+
+        return response.status(200).send(result);
+    }   
     
     async createForma(request:Request, response:Response) {      
         

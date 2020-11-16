@@ -69,5 +69,6 @@ routes.get('/balcao/:idBalcao', BalcaoController.getByIdBalcao)
 routes.get('/balcao/:idUsuario/produtor', BalcaoController.getByProdutor)
 
 routes.post('/forma?', FormaController.createForma)
+routes.patch('/forma/:idForma', FormaController.settingIsAtivo)
 
 export default routes;

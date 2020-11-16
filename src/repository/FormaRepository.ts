@@ -12,6 +12,18 @@ class FormaRepository extends Repository<Forma> {
         PAGAMENTO: "pagamento",
         ENTREGA: "entrega",
     }
+    
+    async changeIsAtivo(forma: Forma): Promise<Forma> {
+
+        if (forma.isAtivo) {
+            forma.isAtivo = false;
+        } else {
+            forma.isAtivo = true;
+        }
+
+        return await this.save(forma)
+    }
+
 
     async createForma(tipo: any, nomeConvenio: any, usuario: Usuario): Promise<Forma | undefined> {
 
