@@ -29,6 +29,7 @@ export class Pedido {
     @OneToMany(type => ItemPedido, itemPedido => itemPedido.pedido, {
         cascade: true,
         eager: true,
+        onDelete: "CASCADE", 
     })
     itensPedido: ItemPedido[];
 

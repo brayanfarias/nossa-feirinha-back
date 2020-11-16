@@ -28,6 +28,7 @@ export class Usuario {
         /**
          * @todo Implementar outra forma de deletar a linha do Endereco
          * @see https://github.com/typeorm/typeorm/issues/3218
+         * Adding the cascade to both sides (OneToMany and ManyToOne) works. If you put it on one side it will not work
          */
         onDelete: "CASCADE",
         eager: true

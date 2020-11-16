@@ -16,6 +16,22 @@ const consumidorService = new ConsumidorService()
 
 class PedidoController {
 
+    async deletePedido(request: Request, response: Response) {
+
+        const idPedido = request.params.idPedido
+
+        const pedidoRepository = getCustomRepository(PedidoRepository);
+
+        const pedido: Pedido = await pedidoRepository.findOne(idPedido)
+
+        if (!pedido) return response.sendStatus(404)
+
+        const result: Pedido = await pedidoRepository.remove(pedido);
+
+        return response.status(200).send(result);
+
+    }
+
     async getByIdUsuario(request: Request, response: Response) {
 
         const idUsuario = request.params.idUsuario

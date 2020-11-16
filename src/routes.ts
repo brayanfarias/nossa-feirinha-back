@@ -87,5 +87,6 @@ routes.get('/usuario/:idUsuario', UsuarioController.getById)
 routes.get('/pedido/:idUsuario/usuario', PedidoController.getByIdUsuario)
 routes.post('/pedido', PedidoController.createPedido)
 routes.get('/pedido/:idPedido', PedidoController.getByIdPedido)
+routes.delete('/pedido/:idPedido', PedidoController.deletePedido)
 
 export default routes;
