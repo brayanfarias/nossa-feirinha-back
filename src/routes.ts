@@ -5,6 +5,7 @@ import ConsumidorController from "./controller/ConsumidorController";
 import EventoController from "./controller/EventoController";
 import ExposicaoController from "./controller/ExposicaoController";
 import GondolaController from './controller/GondolaController';
+import HortaController from "./controller/HortaController";
 import PermissionController from "./controller/PermissionController";
 import ProdutoController from './controller/ProdutoController';
 import ProdutorController from "./controller/ProdutorController";
@@ -38,7 +39,7 @@ routes.get('/evento', EventoController.getEventosAtivos)
 routes.delete('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.deleteEventoAndItsRelations)
 routes.get('/evento/:idEvento/get-subscribers',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getSubscribersAtivos)
 
-routes.post('/produto', is(["ROLE_PRODUTOR"]), ProdutoController.create)
+routes.post('/produto',  ProdutoController.create)
 routes.get('/produto',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getAll)
 routes.get('/produto/:idUsuario',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getByProdutor)
 routes.get('/evento/:idEvento/get-gondolas', EventoController.getAllGondolas)
@@ -62,6 +63,15 @@ routes.post('/exposicao', ExposicaoController.createExposicao)
 routes.delete('/exposicao/:idExposicao', ExposicaoController.deleteExposicao)
 routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
 
+
+routes.get('/horta/:idUsuario/produtor', HortaController.getByProdutor)
+routes.post('/horta', HortaController.create)
+routes.get('/horta/:idHorta', HortaController.getHorta)
+routes.patch('/horta', HortaController.updateHorta)
+routes.patch('/horta/:idHorta', HortaController.settingIsColhido)
+routes.delete('/horta/:idHorta', HortaController.deleteHorta)
+
 routes.get('/usuario/:idUsuario', UsuarioController.getById)
+
 
 export default routes;
