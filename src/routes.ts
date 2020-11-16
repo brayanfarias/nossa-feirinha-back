@@ -77,6 +77,7 @@ routes.get('/usuario/:idUsuario', UsuarioController.getById)
 routes.post('/favorito', FavoritoController.createFavorito)
 routes.get('/favorito/:idUsuario/consumidor', FavoritoController.getByIdConsumidor)
 routes.get('/favorito/:idFavorito', FavoritoController.getByIdFavorito)
+routes.patch('/favorito/:idFavorito', FavoritoController.settingIsAtivo)
 routes.patch('/favorito', FavoritoController.updateFavorito)
 
 

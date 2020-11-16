@@ -8,6 +8,20 @@ import UsuarioRepository from "../repository/UsuarioRepository";
 
 class FavoritoController {
 
+    async settingIsAtivo(request: Request, response: Response) {
+
+        const idFavorito = request.params.idFavorito
+
+        const favoritoRespository = getCustomRepository(FavoritoRespository);
+
+        const favorito: Favorito = await favoritoRespository.findOne(idFavorito)
+
+        const result: Favorito = await favoritoRespository.changeIsAtivo(favorito)
+
+        return response.status(200).send(result)
+
+    }
+
     async updateFavorito(request: Request, response: Response) {
 
         const favorito: Favorito = request.body as Favorito;
