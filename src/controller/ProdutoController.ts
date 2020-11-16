@@ -1,11 +1,24 @@
 import { Request, Response } from "express";
-import { getConnection } from "typeorm";
+import { getConnection, getCustomRepository, Like } from "typeorm";
 import { Produto } from "../entity/Produto";
+import ProdutoRepository from "../repository/ProdutoRepository";
 import UsuarioService from "../services/UsuarioService";
 
 const usuarioService = new UsuarioService();
 
-export class ProdutoController {    
+export class ProdutoController {
+
+    async getByStringLike(request: Request, response: Response) {
+
+        const string = request.query.product
+
+        if (!string) return response.sendStatus(400)
+
+        const produtos: Produto[] = await getCustomRepository(ProdutoRepository).find({ where: { nome: Like(`%${string}%`) } })
+
+        return response.status(200).send(produtos)
+
+    }    
 
     async delete(request: Request, response: Response) {
       

@@ -4,6 +4,7 @@ import AssinaturaController from './controller/AssinaturaController';
 import ConsumidorController from "./controller/ConsumidorController";
 import EventoController from "./controller/EventoController";
 import ExposicaoController from "./controller/ExposicaoController";
+import FavoritoController from "./controller/FavoritoController";
 import GondolaController from './controller/GondolaController';
 import HortaController from "./controller/HortaController";
 import PermissionController from "./controller/PermissionController";
@@ -40,6 +41,7 @@ routes.delete('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), Event
 routes.get('/evento/:idEvento/get-subscribers',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getSubscribersAtivos)
 
 routes.post('/produto',  ProdutoController.create)
+routes.get('/produto/search?', ProdutoController.getByStringLike)
 routes.get('/produto',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getAll)
 routes.get('/produto/:idUsuario',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getByProdutor)
 routes.get('/evento/:idEvento/get-gondolas', EventoController.getAllGondolas)
@@ -72,6 +74,12 @@ routes.patch('/horta/:idHorta', HortaController.settingIsColhido)
 routes.delete('/horta/:idHorta', HortaController.deleteHorta)
 
 routes.get('/usuario/:idUsuario', UsuarioController.getById)
+
+routes.post('/favorito', FavoritoController.createFavorito)
+routes.get('/favorito/:idUsuario/consumidor', FavoritoController.getByIdConsumidor)
+routes.get('/favorito/:idFavorito', FavoritoController.getByIdFavorito)
+routes.patch('/favorito/:idFavorito', FavoritoController.settingIsAtivo)
+routes.patch('/favorito', FavoritoController.updateFavorito)
 
 
 export default routes;
