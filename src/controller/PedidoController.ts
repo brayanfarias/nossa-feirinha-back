@@ -15,6 +15,15 @@ const consumidorService = new ConsumidorService()
 
 class PedidoController {
 
+    async getByIdPedido(request: Request, response: Response) {
+
+        const idPedido = request.params.idPedido
+
+        const pedido: Pedido = await getCustomRepository(PedidoRepository).findOne(idPedido, { relations: ["balcao", "pagamento", "entrega", "consumidor"] })
+
+        return response.status(200).send(pedido);
+    }
+
     async createPedido(request: Request, response: Response) {
 
         const idBalcao = request.body.Balcao.idBalcao

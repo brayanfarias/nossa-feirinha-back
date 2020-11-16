@@ -74,5 +74,6 @@ routes.patch('/forma/:idForma', FormaController.settingIsAtivo)
 routes.get('/forma/:idUsuario', FormaController.getFormasByProdutor)
     
 routes.post('/pedido', PedidoController.createPedido)
+routes.get('/pedido/:idPedido', PedidoController.getByIdPedido)
 
 export default routes;

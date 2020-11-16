@@ -8,7 +8,9 @@ export class ItemPedido {
     @PrimaryGeneratedColumn('uuid')
     idItemPedido: string;
 
-    @ManyToOne(type => Produto)
+    @ManyToOne(type => Produto, {
+        eager: true,
+    })
     @JoinColumn()
     produto: Produto;
 
