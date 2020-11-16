@@ -31,10 +31,10 @@ class PedidoRepository extends Repository<Pedido>{
         pedido.itensPedido = []
 
         for (const item of itensPedido) {
-            
-            const idProduto = item.idProduto;
+
+            const idProduto = item.Produto.idProduto;
             const produto: Produto = await produtoService.getById(idProduto)
-   
+
             let itemPedido = new ItemPedido()
             itemPedido.produto = produto;
             itemPedido.quantidade = item.Produto.quantidade;

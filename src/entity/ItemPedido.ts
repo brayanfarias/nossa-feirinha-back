@@ -8,7 +8,7 @@ export class ItemPedido {
     @PrimaryGeneratedColumn('uuid')
     idItemPedido: string;
 
-    @OneToOne(type => Produto)
+    @ManyToOne(type => Produto)
     @JoinColumn()
     produto: Produto;
 

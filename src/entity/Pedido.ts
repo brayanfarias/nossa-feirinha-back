@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Balcao } from "./Balcao";
 import { Consumidor } from "./Consumidor";
 import { Entrega } from "./Entrega";
@@ -11,18 +11,18 @@ export class Pedido {
     @PrimaryGeneratedColumn('uuid')
     idPedido: string;
 
-    @OneToOne(type => Balcao)
+    @ManyToOne(type => Balcao)
     @JoinTable()
     balcao: Balcao;
 
     @Column()
     dataPedido: string;
 
-    @OneToOne(type => Pagamento)
+    @ManyToOne(type => Pagamento)
     @JoinTable()
     pagamento: Pagamento;
 
-    @OneToOne(type => Entrega)
+    @ManyToOne(type => Entrega)
     @JoinTable()
     entrega: Entrega;
 
@@ -31,7 +31,7 @@ export class Pedido {
     })
     itensPedido: ItemPedido[];
 
-    @OneToOne(type => Consumidor)
+    @ManyToOne(type => Consumidor)
     @JoinTable()
     consumidor: Consumidor;
 }
