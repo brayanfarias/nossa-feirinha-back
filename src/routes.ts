@@ -6,6 +6,7 @@ import ConsumidorController from "./controller/ConsumidorController";
 import EventoController from "./controller/EventoController";
 import ExposicaoController from "./controller/ExposicaoController";
 import FormaController from "./controller/FormaController";
+import FavoritoController from "./controller/FavoritoController";
 import GondolaController from './controller/GondolaController';
 import HortaController from "./controller/HortaController";
 import PedidoController from "./controller/PedidoController";
@@ -43,8 +44,9 @@ routes.delete('/evento/:idEvento', EventoController.deleteEventoAndItsRelations)
 routes.get('/evento/:idEvento/get-subscribers', EventoController.getSubscribersAtivos)
 
 routes.post('/produto',  ProdutoController.create)
-routes.get('/produto', ProdutoController.getAll)
-routes.get('/produto/:idUsuario', ProdutoController.getByProdutor)
+routes.get('/produto/search?', ProdutoController.getByStringLike)
+routes.get('/produto',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getAll)
+routes.get('/produto/:idUsuario',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), ProdutoController.getByProdutor)
 routes.get('/evento/:idEvento/get-gondolas', EventoController.getAllGondolas)
 routes.delete('/produto/:idProduto', ProdutorController.delete)
 
@@ -83,6 +85,13 @@ routes.patch('/horta/:idHorta', HortaController.settingIsColhido)
 routes.delete('/horta/:idHorta', HortaController.deleteHorta)
 
 routes.get('/usuario/:idUsuario', UsuarioController.getById)
+routes.patch('/usuario', UsuarioController.updateUsuario)
+
+routes.post('/favorito', FavoritoController.createFavorito)
+routes.get('/favorito/:idUsuario/consumidor', FavoritoController.getByIdConsumidor)
+routes.get('/favorito/:idFavorito', FavoritoController.getByIdFavorito)
+routes.patch('/favorito/:idFavorito', FavoritoController.settingIsAtivo)
+routes.patch('/favorito', FavoritoController.updateFavorito)
 
 routes.get('/pedido/:idUsuario/usuario', PedidoController.getByIdUsuario)
 routes.post('/pedido', PedidoController.createPedido)
