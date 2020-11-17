@@ -1,8 +1,8 @@
-import { Column, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Consumidor } from "./Consumidor";
-import { Produtor } from "./Produtor";
+import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn, TableInheritance } from "typeorm";
 import { Usuario } from "./Usuario";
 
+@Entity()
+@TableInheritance({ column: { type: 'varchar', name: 'tipo' } })
 export class Forma {
 
     @PrimaryGeneratedColumn('uuid')
@@ -12,12 +12,11 @@ export class Forma {
     dataCriacao: string;
 
     @Column()
-    isAtivo: boolean;
+    isAtivo: boolean = true;
 
     @Column()
     nomeConvenio: string
 
-    @OneToOne(type => Produtor || Consumidor)
-    @JoinTable()
+    @ManyToOne(type => Usuario)    
     criador: Usuario
 }

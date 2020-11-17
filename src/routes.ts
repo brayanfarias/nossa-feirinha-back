@@ -1,12 +1,15 @@
 import { Router } from "express";
 import AdministradorController from "./controller/AdministradorController";
 import AssinaturaController from './controller/AssinaturaController';
+import BalcaoController from "./controller/BalcaoController";
 import ConsumidorController from "./controller/ConsumidorController";
 import EventoController from "./controller/EventoController";
 import ExposicaoController from "./controller/ExposicaoController";
+import FormaController from "./controller/FormaController";
 import FavoritoController from "./controller/FavoritoController";
 import GondolaController from './controller/GondolaController';
 import HortaController from "./controller/HortaController";
+import PedidoController from "./controller/PedidoController";
 import PermissionController from "./controller/PermissionController";
 import ProdutoController from './controller/ProdutoController';
 import ProdutorController from "./controller/ProdutorController";
@@ -33,12 +36,12 @@ routes.delete('/produtor/:idUsuario',is(["ROLE_ADMIN"]), ProdutorController.dele
 routes.post('/admin',AdministradorController.create)
 
 routes.get('/evento/search/?', EventoController.getEventosByProduto)
-routes.post('/evento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.createEvento);
-routes.patch('/evento', is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.updateEvento)
+routes.post('/evento', EventoController.createEvento);
+routes.patch('/evento', EventoController.updateEvento)
 routes.get('/evento/:idEvento', EventoController.getEvento)
 routes.get('/evento', EventoController.getEventosAtivos)
-routes.delete('/evento/:idEvento',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.deleteEventoAndItsRelations)
-routes.get('/evento/:idEvento/get-subscribers',is(["ROLE_PRODUTOR","ROLE_CONSUMIDOR"]), EventoController.getSubscribersAtivos)
+routes.delete('/evento/:idEvento', EventoController.deleteEventoAndItsRelations)
+routes.get('/evento/:idEvento/get-subscribers', EventoController.getSubscribersAtivos)
 
 routes.post('/produto',  ProdutoController.create)
 routes.get('/produto/search?', ProdutoController.getByStringLike)
@@ -65,6 +68,14 @@ routes.post('/exposicao', ExposicaoController.createExposicao)
 routes.delete('/exposicao/:idExposicao', ExposicaoController.deleteExposicao)
 routes.get('/exposicao/gondola/:idGondola', ExposicaoController.getByGondola)
 
+routes.post('/balcao', BalcaoController.createBalcao)
+routes.patch('/balcao/:idBalcao', BalcaoController.settingIsAtivo)
+routes.get('/balcao/:idBalcao', BalcaoController.getByIdBalcao)
+routes.get('/balcao/:idUsuario/produtor', BalcaoController.getByProdutor)
+
+routes.post('/forma?', FormaController.createForma)
+routes.patch('/forma/:idForma', FormaController.settingIsAtivo)
+routes.get('/forma/:idUsuario', FormaController.getFormasByProdutor) 
 
 routes.get('/horta/:idUsuario/produtor', HortaController.getByProdutor)
 routes.post('/horta', HortaController.create)
@@ -82,5 +93,10 @@ routes.get('/favorito/:idFavorito', FavoritoController.getByIdFavorito)
 routes.patch('/favorito/:idFavorito', FavoritoController.settingIsAtivo)
 routes.patch('/favorito', FavoritoController.updateFavorito)
 
+routes.get('/pedido/:idUsuario/usuario', PedidoController.getByIdUsuario)
+routes.post('/pedido', PedidoController.createPedido)
+routes.get('/pedido/:idPedido', PedidoController.getByIdPedido)
+routes.delete('/pedido/:idPedido', PedidoController.deletePedido)
+routes.patch('/pedido', PedidoController.updatePedido)
 
 export default routes;
