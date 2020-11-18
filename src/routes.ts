@@ -75,7 +75,7 @@ routes.get('/balcao/:idUsuario/produtor', BalcaoController.getByProdutor)
 
 routes.post('/forma?', FormaController.createForma)
 routes.patch('/forma/:idForma', FormaController.settingIsAtivo)
-routes.get('/forma/:idUsuario', FormaController.getFormasByProdutor) 
+routes.get('/forma/:idUsuario?', FormaController.getFormasByProdutor) 
 
 routes.get('/horta/:idUsuario/produtor', HortaController.getByProdutor)
 routes.post('/horta', HortaController.create)
