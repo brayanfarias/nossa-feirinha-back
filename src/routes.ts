@@ -5,10 +5,11 @@ import BalcaoController from "./controller/BalcaoController";
 import ConsumidorController from "./controller/ConsumidorController";
 import EventoController from "./controller/EventoController";
 import ExposicaoController from "./controller/ExposicaoController";
-import FormaController from "./controller/FormaController";
 import FavoritoController from "./controller/FavoritoController";
+import FormaController from "./controller/FormaController";
 import GondolaController from './controller/GondolaController';
 import HortaController from "./controller/HortaController";
+import NotificacaoController from "./controller/NotificacaoController";
 import PedidoController from "./controller/PedidoController";
 import PermissionController from "./controller/PermissionController";
 import ProdutoController from './controller/ProdutoController';
@@ -19,6 +20,9 @@ import UsuarioController from "./controller/UsuarioController";
 import { is } from "./middleware/permissions";
 
 const routes = Router();
+
+routes.post('/notificacao', NotificacaoController.createNotificacao)
+routes.get('/notificacao', NotificacaoController.getAllNotificacoes)
 
 routes.post("/sessions", SessionController.create);
 routes.post("/permissions", PermissionController.create);

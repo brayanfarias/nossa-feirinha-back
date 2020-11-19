@@ -1,27 +1,28 @@
-import { Column, Entity, JoinTable, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Consumidor } from "./Consumidor";
-import { Produtor } from "./Produtor";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Evento } from "./Evento";
 import { Usuario } from "./Usuario";
+import moment = require('moment');
 
 @Entity()
 export class Notificacao {
 
     @PrimaryGeneratedColumn('uuid')
-    idNotificacao:string;
+    idNotificacao: string;
 
-    @OneToOne(type => Consumidor || Produtor)
-    @JoinTable()
-    usuario:Usuario;
-
-    @Column()
-    dataAssinaturaNotificacao:string;
+    @ManyToOne(type => Usuario)
+    @JoinColumn()
+    usuario: Usuario;
 
     @Column()
-    isAtivo: boolean;
+    dataAssinaturaNotificacao: string = moment().format();
 
     @Column()
-    canalEscolhido:string;
+    isAtivo: boolean = true;
+
+    @ManyToOne(type => Evento)
+    @JoinColumn()
+    evento: Evento
 
     @Column()
-    mensagem:string;
+    canalEscolhido: string = "MENU_NOTIFICACAO";
 }
