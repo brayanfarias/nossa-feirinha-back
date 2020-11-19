@@ -22,7 +22,9 @@ const routes = Router();
 
 routes.post("/sessions", SessionController.create);
 routes.post("/permissions", PermissionController.create);
+
 routes.post("/roles", RoleController.create);
+routes.get('/roles', RoleController.getAllRoles)
 
 routes.post('/consumidor', ConsumidorController.create);
 routes.get('/consumidor/:email', ConsumidorController.getByEmail);

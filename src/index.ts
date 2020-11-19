@@ -1,13 +1,14 @@
 import "reflect-metadata";
+import { createConnection, getCustomRepository } from "typeorm";
+import routes from './routes';
 import express = require('express');
 import bodyParser = require('body-parser')
-import routes from './routes'
 import cors = require('cors');
-import { createConnection } from "typeorm";
+import RoleRepository from "./repository/RoleRepository";
 
 const app = express();
 
-createConnection()
+createConnection().then( async () => await getCustomRepository(RoleRepository).generateRoles())
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
     app.use(cors());
     next();
 });
+
 app.use(bodyParser.json({limit: '10mb'}))
 
 app.use(bodyParser.urlencoded({limit: '10mb', extended: true}))
