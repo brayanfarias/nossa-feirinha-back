@@ -2,8 +2,17 @@ import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
 import RoleRepository from "../repository/RoleRepository";
 import PermissionRepository from "../repository/PermissionRepository";
+import Role from "../entity/Role";
 
 class RoleController {
+
+  async getAllRoles(request: Request, response: Response) {
+
+    const roles: Role[] = await getCustomRepository(RoleRepository).find();
+    return response.status(200).send(roles)
+
+  }
+
   async create(request: Request, response: Response) {
     const roleRepository = getCustomRepository(RoleRepository);
     const permissionRepository = getCustomRepository(PermissionRepository);
